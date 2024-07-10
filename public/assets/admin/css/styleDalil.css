@@ -1,0 +1,117 @@
+
+.background{
+    background-color: #00b075;
+}
+
+.white{
+    color:white;
+}
+.selection{
+  border:0px;
+  outline: 0px;
+  cursor: pointer;
+}
+.forDisplay{
+    width:66rem;
+    background-color: #fff;
+    min-height: auto;
+}
+
+.edited{
+    text-align: center;
+}
+.edited img {
+    margin: 2px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+
+.color{
+    color:#00b075;
+}
+.top{
+    background-color: #fff;
+    cursor: pointer;
+    height: 2rem;
+    font-weight: 600;
+    word-spacing: 1px;
+    border-bottom: 1px solid #EDEFF0;
+    box-shadow: 7px 0px 0px 0px;
+
+}
+.top:hover{
+    background-color: #f5f9fc;
+}
+.logo{
+    font-family: Arabic;
+    height: 2rem;
+}
+li{
+    font-family: Arabic;
+}
+option{
+    font-family: Arabic;
+    cursor: pointer;
+    border:0px;outline: none;
+}
+.select{
+    font-family: Arabic;  cursor: pointer;
+    border:1px solid #fff;
+outline: none;
+}
+.option{
+    font-family: Arabic;  cursor: pointer;
+    border:1px solid #fff;
+outline: none;
+}
+footer{
+    height: 7rem;
+    background-color: #00b075;
+    margin-top: 14rem;
+}
+.gridTemplet{
+    grid-template-columns: auto auto auto auto auto;
+    padding: 8px;
+}
+.bg-sitest-hover{
+    min-width: auto;
+    min-height: auto;
+    /* background-color: #00b075; */
+    padding: 5px;
+}
+.bg-sitest-hover:hover{
+    background-color: #9999;
+}
+.a-sites{
+    line-height: 35px;
+}
+.div_fixed{
+    min-width: auto;
+    min-height: auto;
+}
+.div_fixed:hover{
+    background-color:aliceblue;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .gridTemplet{
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media  (min-width: 600px ) and (max-width:768px) {
+    .gridTemplet{
+        grid-template-columns: auto auto auto;
+    }
+}
+/* @media  (min-width: 768px) and (max-width:920px) {
+    .d-postion{
+        display: grid;
+        grid-template-columns: auto auto;
+
+
+    }
+} */

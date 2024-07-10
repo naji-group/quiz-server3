@@ -1,0 +1,839 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+
+/* ################ header ############### */
+/* @font-face {
+    font-family: Arabic;
+    src: url("Monadi.ttf");
+} */
+
+body {
+    background: none repeat scroll 0 0 #EDF0EF;
+    direction: rtl;
+}
+
+.search{
+    display: flex;
+    justify-content: center;
+}
+
+.icon-home:hover{
+    background-color:#fff;
+}
+.icon-home{
+    width: 75%;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    background-color:#EDF0EF;
+    /*padding:5px;*/
+    align-items:center;
+    margin-top:7px;
+    border: 1px solid #009E69;
+    justify-content: center;
+    border-radius: 2px 2px 2px 2px;
+}
+.icon-home a{
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+    color:#00AC73;
+    padding-left: 10px;
+
+}
+.icon-home i{
+    margin-left:1rem;
+}
+.bar-img{
+    width: 100%;
+    height: 34px;
+    position: absolute;
+    z-index: -1;
+}
+
+.bar-top{
+    text-align:center;
+    padding:5px;
+    /*background:url("../public/uploading/bgnav.png") repeat-x scroll 0 -970px transparent;*/
+}
+
+.bar-title{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-weight:bold;
+    color: #00AC73;
+}
+.bar-text{
+    color: #00AC73;
+}
+
+#namanyay-search-btn{
+    background:#0099ff;
+    color:white;
+    font: 'trebuchet ms', trebuchet;
+    padding:10px 20px;
+    border-radius:5px 0 0 5px;
+    -moz-border-radius:5px 0 0 5px;
+    -webkit-border-radius:5px 0 0 5px;
+    -o-border-radius:5px 0 0 5px;
+    border:0 none;
+    font-weight:bold;
+}
+#namanyay-search-btn:hover{
+    background-color: rgba(0, 150, 250, 0.678);
+}
+#namanyay-search-box {
+    background: #fff;
+    padding:10px;
+    border-radius:0 5px 5px 0;
+    -moz-border-radius:0 5px 5px 0;
+    -webkit-border-radius:0 5px 5px 0;
+    -o-border-radius:0 5px 5px 0;
+    border:0 none;
+    width:560px;
+}
+
+.navbar {
+    border-bottom: 1px solid #009E69;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar .btn {
+    padding: 1px 16px;
+    background-color: #009E69;
+    border: 1px solid #009E69;
+    color: #fff;
+}
+
+/* .logo {
+    font-family: Arabic;
+    height: 2rem;
+} */
+
+.datee {
+    font-size: 11px;
+    width: 229px;
+    height: 43px;
+    margin-right: 33rem;
+    color: #fff;
+}
+
+.edit {
+    margin-left: 50rem;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0 3px 5px;
+    width: 100%;
+
+}
+
+.list li {
+    width: 31%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    background-color: #EBFCF7;
+    min-width: 300px;
+}
+
+.dropdown-menu ul li {
+    margin-bottom: 2px;
+    padding: 3px 6px;
+}
+
+.dropdown-menu ul li:hover {
+    background-color: #D9F3EA;
+}
+
+.navbar-brand {
+    font-size: 14px;
+}
+
+.bg .edit-footer ul li a{
+    color: #999999;
+}
+
+.bg a {
+    color: #fff;
+}
+.navbar {
+    background-color: #00b075;
+}
+
+/* ################################################# */
+/* ####################### main ########################## */
+
+
+.box-fot li {
+    display: inline;
+    text-align: right;
+}
+
+.box-fot a {
+    color: #ffff;
+}
+
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 5px;
+    right: 0;
+    width: 100%;
+}
+
+.footer .box-fot li a {
+    text-decoration: none;
+}
+
+.footer .box-fot li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ##############################################تعديل من صفحة تصنيفات فرعية################################################### */
+.box-main-sub{
+    width: 83%;
+    margin-right: 5rem;
+    background-color: #F5F7F7;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 1px solid #E3E5E6;
+}
+.box-main-sub ul{
+    background-color: #fff;
+    width: 100%;
+    display: inline-flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box-main-sub ul li{
+    margin-top: 5px;
+    width: 29.9%;
+    padding: 2px;
+    /* margin-left: -15px; */
+    margin-right: 28px;
+    margin-bottom: 12px;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.box-main-sub ul li .anchor:hover{
+    background-color: #E8EAEB;
+}
+.box-main-sub ul li .anchor{
+    width:100%;
+    position: relative;
+    margin-top: -6px;
+    padding: 4px;
+    padding-left: 30px;
+    padding-right: 2px;
+    margin-right: 2px;
+}
+.box-main-sub ul li a{
+    margin-left: 5px;
+    white-space: nowrap;
+    color: #595959;
+    text-decoration: none;
+}
+.box-main-sub h6{
+    background-color:#F5F7F7 ;
+    font-size: 15px;
+    color: #00b075;
+    width: 100%;
+    height: 25px;
+    padding-right: 9px;
+    line-height: 32px;
+}
+.box-main-sub .border-sub-h{
+    border-bottom:1px solid #EDEFF0;
+}
+
+
+/* ##################################### هاد من ستايل دليل ######################################## */
+
+.forDisplay {
+    max-width: 951px;
+    background-color: #fff;
+    min-height: auto;
+    border: 1px solid #2222;
+    border-radius: 2px;
+}
+
+.edited {
+    text-align: center;
+    padding-top: 5px;
+}
+
+.edited img {
+    margin: 2px;
+    margin-left:3px;
+    margin-bottom: 5px;
+    object-fit: contain;
+}
+
+footer {
+    height: 7rem;
+    background-color: #00b075;
+    margin-top: 14rem;
+}
+
+.gridTemplet {
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    padding: 8px;
+}
+.div_fixed {
+    margin-right:13px;
+    width: 6rem;
+    height: 6rem;
+    text-align: -webkit-center;
+}
+.div_fixed:hover{
+    background-color: aliceblue;
+}
+
+.div-hover-fixed{
+    max-width: 93px;
+    min-height: auto;
+}
+
+/*.div-hover-fixed:hover {*/
+/*    background-color: aliceblue;*/
+/*    width: auto;*/
+/*}*/
+
+
+
+/* ################################################################################################# */
+
+/* ##############################################  تعديل على صفحة الوصف  ################################################### */
+
+.ads-box-left{
+    width:50%;
+    text-align:center;
+    position:relative;
+}
+.box-right{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.ads-box-left .ads{
+    margin-top: 3rem;
+    color: #000;
+    position: relative;
+    top: 30%;
+}
+.box-main-discr{
+    background-color: #fff;
+    width: 87%;
+    margin-right: 5rem;
+    border: 1px solid #E3E5E6;
+}
+.box-main-discr .edit-descr-page{
+    width: 100%;
+    background-color: #F5F7F7;
+    font-size: 20px;
+    font-weight: 600;
+    color: #00b075;
+    padding: 5px;
+    border-bottom: 1px solid #E3E5E6;
+}
+.box-main-discr .edit-descr-page span{
+    margin-right:1.8rem;
+}
+
+.edit-ul-descr {
+    list-style: none;
+}
+
+.edit-ul-descr li {
+    margin-bottom: 1rem;
+}
+.edit-ul-descr .social a{
+    opacity: .8;
+}
+.edit-ul-descr .social a:hover{
+    opacity: 1;
+}
+.edit-ul-descr li i {
+    margin-left: 1rem;
+}
+.i-sub{
+    margin-right: 10px;
+}
+.btn-descr{
+    margin-left: 5px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    background-color: #ffff;
+    color: #000;
+}
+.btn-descr:hover{
+    background-color: #EBFCF7;
+    box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    color: #595959;
+}
+.tags-descr{
+    background-color: #fff;
+    border: 1px solid #d1d5d4;
+    padding: 4px 8px;
+    border-radius: 3px;
+    color: #000;
+}
+.tags-descr:hover{
+    background: none repeat scroll 0 0 #E8EAEB;
+    box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 2px 6px 2px;
+    color: #595959;
+}
+/* ########################### قسم تصنيفات ############################### */
+.box-category{
+    max-width:992px;
+}
+.box{
+    width: 100%;
+    /* background-color: #444; */
+    padding: 5px;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.box .one{
+    margin-right: 6px;
+    margin-left:11px;
+    margin-bottom: 8px;
+    width:18.2%;
+    background-color: #fff;
+    border: 1px solid #E3E5E6;
+    /* overflow: hidden; */
+}
+
+.box .one ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    overflow:hidden;
+}
+.box .one .global-icon{
+    margin-right:4px;
+    margin-left:1px;
+    color:#595959;
+}
+.box .one ul li{
+    padding: 2px;
+    margin: 4px;
+    width: auto;
+    overflow:hidden;
+    position: relative;
+    top: -32px;
+    margin-right: 24px;
+
+}
+
+.box .one ul li:hover{
+    background: none repeat scroll 0 0 #E8EAEB;
+
+}
+
+.box .one ul li a{
+    /* padding: 2px; */
+    font-size: 14px;
+    text-decoration: none;
+    color: #595959;
+}
+.box .one ul li .span-a{
+    margin-right: 8px;
+    position: relative;
+    /*top: -2px;*/
+}
+.box .one ul .li-inside{
+    width:100%;
+    margin-bottom:-21px;
+
+}
+.box .one .aaa h6{
+    width: 100%;
+    background-color: #F5F7F7;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #D9F3EA;
+}
+.box .one .aaa h6:hover{
+    background-color: #D9F3EA;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.box .one .aaa h6 , .box .one h6 i{
+    font-size: 14px;
+    text-decoration: none;
+    color: #00b075;
+    font-weight: 600;
+}
+.box .one .aaa i{
+    margin-left: 8px;
+}
+
+/* ######################################## صفحة حول ################################################ */
+.main-about{
+    width: 100%;
+    display:flex;
+    justify-content: right;
+}
+.main-about .custom_page_left{
+    width: 80%;
+    margin-right: 1rem;
+    background-color: #FAFCFC;
+    color: #666666;
+    border: 1px solid #E3E5E6;
+    border-radius: 2px;
+}
+.main-about .custom_page_left .description_page{
+    padding: 0px 10px 10px 10px;
+    color: #666666;
+}
+.main-about .custom_page_left h5{
+    background-color: #F5F7F7;
+    padding:10px;
+    font-size: 17px;
+    color: #00b075;
+    border-bottom: 1px solid #dddddd;
+}
+.main-about .custom_page_right{
+    border-radius: 2px;
+    width: 18%;
+    height: 10rem;
+    background-color: #F5F7F7;
+    border: 1px solid #E3E5E6;
+    margin-right: 1.8rem;
+}
+.main-about .custom_page_right ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.main-about .custom_page_right ul a li {
+    margin: 5px;
+    line-height: 2rem;
+    margin-bottom: 1rem;
+}
+.main-about .custom_page_right ul a li:hover{
+    background-color: #00AC73;
+    color: #fff;
+}
+.main-about .custom_page_right ul a{
+    text-decoration: none;
+    color: #999999;
+}
+/* ########################################  ################################################ */
+/* ######################################## Begin page search  ################################################ */
+.div-sites .list-sitess-search{
+    width: 98%;
+    border-radius: 5px;
+    background-color: #fefefe;
+    padding: 12px 18px;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.list-sitess-search .global-icon{
+    margin-right: 0.5rem;
+}
+.list-sitess-search .anch-sitess{
+    font-size: 14px;
+    text-decoration: none;
+    color: #595959;
+    width: 21.5%;
+    margin-right: 0.5rem;
+    padding: 5px 12px;
+}
+
+.list-sitess-search li  , .div-sites .list-sitess-search i{
+    color: #595959;
+}
+.list-sitess-search .anch-sitess:hover{
+    background: none repeat scroll 0 0 #E8EAEB;
+}
+.head-search-sitess{
+    color: #00b075;
+    width: 100%;
+    /* background-color: #00b075; */
+    padding: 6px 10px;
+    border-bottom: 1px solid #00b075;
+    font-size: 21px;
+}
+/* ######################################## Start section create Sites by user  ################################################ */
+.form-create-user{
+    background-color: #fefefe;
+}
+.family-font{
+    color: #00AC73;
+}
+.family-font h4{
+    color: #00AC73;
+    font-weight: 800;
+}
+
+/* ######################################## End section create Sites by user  ################################################ */
+
+
+/* ######################################## End page search  ################################################ */
+/* ######################################## جعل قسم تصنيفات الرئيسية متجاوب ################################################ */
+
+@media (min-width:991px) and (max-width:1120px){
+    .box .one{
+        width: 22.2%;
+    }
+}
+@media (min-width:200px)  and (max-width:376px){
+    .list-sitess-search .anch-sitess{
+        width: 82% !important;
+    }
+}
+@media (min-width:200px)  and (max-width:991px){
+    .navbar-brand img {
+        margin-right:0 !important;
+    }
+    .search form{
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .search #namanyay-search-btn{
+        padding: 10px 35px ;
+        margin-top: 7px ;
+        border-radius: 5px;
+
+    }
+    .box-right{
+        flex-direction: column;
+    }
+    .ads-box-left{
+        width: 100%;
+        align-items: center;
+    }
+    .box .one{
+        width: 100%;
+    }
+    .box{
+        display: block;
+    }
+    .box-main-sub ul li{
+        width: 100%;
+    }
+    .main-about{
+        display: block;
+    }
+    .main-about .custom_page_right{
+        width: 50%;
+        margin-right:17px;
+    }
+
+
+}
+
+/* ########################################  ################################################ */
+
+@media only screen and (max-width: 579px) {
+    .btn {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+    #namanyay-search-box{
+        width:444px;
+    }
+}
+
+@media only screen and (max-width: 815px) {
+    .gridTemplet {
+        grid-template-columns: auto auto auto;
+    }
+    .div_fixed{
+        margin:0 auto;
+    }
+
+}
+@media only screen and (max-width: 600px) {
+    .list-sitess-search .anch-sitess{
+        width: 90%;
+    }
+    .gridTemplet {
+        grid-template-columns: auto auto auto;
+    }
+    .div_fixed{
+        margin:0 auto;
+    }
+    .bar-top{
+        display:none;
+    }
+    .edit-footer {
+        flex-direction: column;
+    }
+    #namanyay-search-box{
+        width:100%;
+    }
+    .icon-barr{
+        display: none;
+    }
+}
+
+@media (min-width: 600px) and (max-width:768px) {
+    .list-sitess-search .anch-sitess{
+        width: 44%;
+    }
+    .gridTemplet {
+        grid-template-columns: auto auto auto;
+    }
+    .div_fixed{
+        margin:0 auto;
+    }
+    .box-main-sub{
+        margin-right:5rem;
+        width:79%;
+    }
+    .icon-barr{
+        display: none;
+    }
+    .bar-top{
+        display:none;
+    }
+}
+
+/* @media  (min-width: 768px) and (max-width:920px) {
+    .d-postion{
+        display: grid;
+        grid-template-columns: auto auto;
+
+
+    }
+} */
+/* ####################################### Date ########################################################## */
+/* @media only screen and()
+ */
+@media (min-width:273px) and (max-width:577px) {
+    .datee {
+        margin-right: -10px;
+        line-height: 4rem;
+    }
+    .box-main-sub{
+        margin-right:2rem;
+    }
+    .box-fot{
+        margin-left:2rem;
+    }
+    .box-main-discr{
+        width: 100%;
+        margin-right: 0;
+    }
+    .icon-barr{
+        display: none;
+    }
+    .bar-top{
+        display:none;
+    }
+}
+
+@media (min-width:200px) and (max-width:340px){
+    .gridTemplet {
+        grid-template-columns: auto auto;
+        width:100%;
+    }
+}
+
+@media (min-width:378px) and (max-width:573px) {
+    .datee {
+        margin-right: -10px;
+        line-height: 4rem;
+    }
+    .navbar .btn{
+        margin-right: 0;
+    }
+    .box-fot{
+        margin-left:2rem;
+    }
+    .icon-barr{
+        display: none;
+    }
+    .bar-top{
+        display:none;
+    }
+}
+
+@media (min-width:578px) and (max-width:767px) {
+    .datee {
+        display: none;
+    }
+    .bar-top{
+        display:none;
+    }
+        #namanyay-search-box{
+        width:429px;
+    }
+}
+
+
+@media (min-width:768px) and (max-width:819px) {
+    .gridTemplet {
+        grid-template-columns: auto auto auto auto;
+    }
+    .div_fixed{
+        margin:0 auto;
+    }
+    .datee {
+        display: block;
+        margin-right: 0;
+
+    }
+    .icon-barr{
+        display: none;
+    }
+    .bar-top{
+        display:none;
+    }
+
+}
+@media (min-width:820px) and (max-width:991px) {
+    .list-sitess-search .anch-sitess{
+        width: 29%;
+    }
+    .gridTemplet {
+        grid-template-columns: auto auto auto auto;
+    }
+    .datee {
+        display: block;
+        margin-right: 10.2rem;
+
+    }
+    .bar-top{
+        display:none;
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    .datee {
+        margin-right: 16rem;
+    }
+    .box-fot{
+        margin-left:2rem;
+    }
+}
+
+@media (min-width:1200px) and (max-width:1750px) {
+    .datee {
+        margin-right: 26rem;
+    }
+    .box-fot{
+        margin-left:2rem;
+    }
+}
+
+/* ################################################################################################# */

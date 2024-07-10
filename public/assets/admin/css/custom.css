@@ -1,0 +1,9 @@
+.dd-item > button:before {
+    display: none!important;
+    
+}
+.dd-item > button{
+ 
+    overflow: visible!important;
+    text-indent: 0%!important;
+}

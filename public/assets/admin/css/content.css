@@ -1,0 +1,103 @@
+.parsley-error {
+  
+border: #ee335e  solid 1px !important;
+ }
+
+ 
+.upimg img{
+    max-width: 100%;
+		border: solid #cdcdcd 1px;
+		padding:5px;
+		border-radius: 3px;
+		-webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .2);
+		box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .2);
+		overflow: hidden;
+		width:200px;
+		height:220px;
+        margin:10px ;
+}
+.image-show{
+    width: 100%;
+    height: auto;
+}
+.upimg .image-show{
+    max-width: 100%;
+    border: solid #cdcdcd 1px;
+    padding-top:5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .2);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    width:200px;
+    height:200px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+.upimg input{
+    margin: 5px;
+}
+
+
+.image-contain {
+    position: relative;
+    float:left;
+    margin:5px;
+    width: 100%;
+}
+.image-contain:hover img{
+    opacity:0.8;
+}
+.image-contain:hover input {
+    display: block;
+}
+.image-contain input {
+    position:absolute;
+    display:none;
+}
+.image-contain input.update   {
+    top:4%;
+    left:4%;
+    padding:5px 10px;
+    
+}
+.image-contain input.delete  {
+   top: 4%;
+   left: 68%;
+   padding:5px 10px;
+}
+
+.image-contain input.update-video  {
+    top:4%;
+    left:4%;
+}
+.image-contain input.update-pdf  {
+    top:4%;
+    left:4%;
+}
+.image-contain input.delete-pdf  {
+    top: 4%;
+    left: 68%;
+ }
+.image-contain input.delete-video  {
+   top: 4%;
+   left: 68%;
+}
+.form-separate  {
+    border-bottom: 1px solid #ced4da;
+    padding-bottom: 25px;
+    margin-bottom: 40px;
+ }
+ #btn-new-img{
+    float: left;
+ }
+ .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    z-index: 1050;
+}
+.ans-col{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

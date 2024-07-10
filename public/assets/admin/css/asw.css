@@ -1,0 +1,95 @@
+body{
+    font-family: NotoKufiArabic;
+}
+.form-controll{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-labell{
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #7b809a;
+}
+.shadow{
+    box-shadow: 0px 0px 11px -1px rgb(50 50 93 / 10%);
+}
+.backgroundW{
+    background-color: #fff;
+}
+
+/* #################### edit border table ####################### */
+.table tbody tr:last-child td{
+    border-width: 1px;
+}
+
+/* #################### create btn for create category inside tables ####################### */
+.btn-create h4{
+    float: right;
+}
+.btn-create a{
+    font-size: 14px;
+    float: left;
+}
+
+/* ####################  tables ####################### */
+
+#demoAcc{
+    position: relative;
+    background-color: #7b809a;
+    height: 0;
+    overflow: hidden;
+    transition: .5s ;
+    overflow-y: auto;
+}
+.show-acc{
+    display: block;
+}
+.tgle{
+    background-color: #344767;
+    border: 0;
+    color: #fff;
+    border-radius: 0;
+    position: relative;
+    bottom: 5px;
+    margin-bottom: 0rem;
+    padding: 4px 12px;
+}
+.listt{
+    background-color: #f1f1f1;
+    -webkit-box-shadow: 0px 1px 5px -1px #000;
+    -moz-box-shadow: 0px 1px 5px -1px #000;
+    box-shadow: 0px 1px 5px -1px #000;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 300px;
+    overflow-y: auto;
+}
+#eee{
+    padding: 3px 8px;
+    line-height: 30px;
+}
+#eee:hover{
+    -webkit-box-shadow: 0px 1px 5px -1px #7b809a;
+    -moz-box-shadow: 0px 1px 5px -1px #7b809a;
+    box-shadow: 0px 1px 5px -1px #7b809a;
+    background-color: #7b809a;
+}
+@font-face {
+    font-family: NotoKufiArabic;
+    src:   url('../fonts/NotoKufiArabic-VariableFont_wght.ttf');
+}
