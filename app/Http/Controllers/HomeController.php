@@ -156,6 +156,8 @@ else{
 //    }
    return view('site.content.categories',['categories'=>$catlist,'transarr'=>$transarr,'lang'=>$lang,'defultlang'=>$defultlang ]);   
     }
+
+
     public function getcategory($lang,$slug)
     {
      //  $formdata=$request->all();
