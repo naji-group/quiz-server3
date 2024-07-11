@@ -15,6 +15,7 @@ class AnswersClient extends Model
         'client_id',
         'answer_id',
         'level_id',
+        'category_id',
         'question_content',
         'answer_content',
         'question_type',
@@ -36,5 +37,9 @@ class AnswersClient extends Model
     public function level(): BelongsTo
     {
         return $this->belongsTo(Level::class)->withDefault();
+    }
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class)->withDefault();
     }
 }

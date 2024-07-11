@@ -21,6 +21,8 @@ class CheckAnsRequest extends FormRequest
       // 'content'=>'required|string',
         'ques'=>'required|integer|gt:0',
         'ans'=>'required|integer|gt:0', 
+        'cat'=>'required|integer|gt:0', 
+        
        ];   
     
     }

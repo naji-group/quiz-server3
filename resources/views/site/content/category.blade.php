@@ -42,12 +42,12 @@
 
             <div class="col-12 " id="ques-div">
               <div id="question-section" class="question-sec" style="display: none">
-                <h3 id="question-text" data="" class="mb-4">ما هو السؤال؟</h3>
+                <h3 id="question-text" data="" class="mb-4"></h3>
                 <div id="ans-container">   
                 <ul id="answers-list" class="list-group ques-group">
                  <li class="list-group-item d-flex align-items-center list-group-item-default" id="1">
                     <span class="answer-indicator"></span>
-                    <span class="answer-text">إجابة 1</span>
+                    <span class="answer-text"></span>
                   </li>
                   
                 
@@ -71,7 +71,7 @@
  
 <script src="{{ url('assets/site/js/quiz.js') }}"></script>
 <script  >
-
+var cat={{ $catquis['id'] }};
 $(document).ready(function() {
   
    

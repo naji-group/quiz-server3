@@ -68,7 +68,7 @@ $(document).ready(function() {
 		});
 	}
 	function checkform(formid,ansidnum) {	 
-		var dataser=  $(formid).serialize() + '&ques='+quesid+'&ans='+ansidnum;		 
+		var dataser=  $(formid).serialize() + '&ques='+quesid+'&ans='+ansidnum+'&cat='+cat;		 
 		urlval = $(formid).attr("action");
 
 		$.ajax({
@@ -112,6 +112,9 @@ $(document).ready(function() {
 					if(data.result==1){
 						$('#u-balance').text(data.balance);
 						noteSuccess() ;
+						if(data.notifylevel==1){
+							swal(" مبروك لقد انتقلت الى المستوى التالي وحصلت على "+data.giftpoints+ "نقاط هدية");
+						}
 					}else{
 						noteError();
 					}

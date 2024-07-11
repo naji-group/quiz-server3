@@ -201,8 +201,9 @@ class QuestionController extends Controller
             $catmodel=Category::find($category_id);
             if($catmodel->notes=='general'){
                 $queslist = Question::where('lang_id',$lang_id)
-                ->whereDoesntHave('answers.answersclients', function ($query) use ($client_id) {
-                    $query->where('client_id', $client_id);
+                ->whereDoesntHave('answers.answersclients', function ($query) use ($client_id,$category_id) {
+                    $query->where('client_id', $client_id)//->where('category_id',$category_id)
+                    ;
                 })->select('id')->pluck('id');
             }else{
                 $queslist = Question::where(['category_id' => $category_id, 'lang_id' => $lang_id])
@@ -254,6 +255,7 @@ class QuestionController extends Controller
             $client_id = auth()->guard('client')->user()->id;
             $question_id = $formdata['ques'];
             $answer_id = $formdata['ans'];
+            $category_id = $formdata['cat'];
             $ansmodel = Answer::where(['id' => $answer_id, 'question_id' => $question_id])->first();
             $anscorrect = Answer::where(['is_correct' => 1, 'question_id' => $question_id])->first();
             $giftpoints=0;
@@ -262,9 +264,10 @@ class QuestionController extends Controller
                 //record the answer
                 $newObj = new AnswersClient();
                 $newObj->is_correct = $ansmodel->is_correct;
-                $newObj->points = 1;
+                $newObj->points = $ansmodel->is_correct==1?1:0;
                 $newObj->client_id = $client_id;
                 $newObj->answer_id = $answer_id;
+                $newObj->category_id = $category_id;
                 // $newObj->level_id = ;
               //  $newObj->question_content ='';
                 $newObj->answer_content = $ansmodel->content;
@@ -274,21 +277,22 @@ class QuestionController extends Controller
                 // $newObj->answer_file = $formdata['answer_file'];
                 $newObj->save();// temmmmmmmmmmmmmmmmmmmmmmmmmmp
                 $client=Client::find($client_id);
+               
+                $clpointmodel= ClientPoint::where('client_id',$client_id)->where('category_id',$category_id)->orderByDesc('created_at')->first();
                 if ($ansmodel->is_correct == 1) {
                     // correct answer
-                    $client->balance = $client->balance + 1;
-                     
-                    $client->total_balance=$client->total_balance+1;
-                 
-                    // level check
-                  $catmod=Question::with('category')->find($question_id)->category;
-
-$clpointmodel= ClientPoint::where('client_id',$client_id)->where('category_id',$catmod->id)->orderByDesc('created_at')->first();
-
+                    $client->balance = $client->balance + 1;                     
+                    $client->total_balance=$client->total_balance+1;                 
+                    // level check.
+                    //get category
+                    //check if ClientPoint level exist
 if($clpointmodel){
     $clpointmodel->points_sum= $clpointmodel->points_sum+1;
     $clpointmodel->save();
     $currentlevel=Level::find($clpointmodel->level_id);
+    //save level id in AnswersClient record
+    $newObj->level_id=$clpointmodel->level_id;
+    $newObj->save();
     $nextlevelval=$currentlevel->value+1;
     $nextlevel=Level::where('value', $nextlevelval)->first();
 
@@ -300,7 +304,7 @@ $client->total_balance=$client->total_balance+$nextlevel->points;
 $newCpObj=new ClientPoint();
 $newCpObj->points_sum = 0;
 $newCpObj->gift_sum = $nextlevel->points;
-$newCpObj->category_id = $catmod->id;
+$newCpObj->category_id = $category_id;
 $newCpObj->client_id =$client_id;
 $newCpObj->level_id = $nextlevel->id;
 $newCpObj->save();
@@ -313,15 +317,21 @@ $notifylevel=1;
 }else{
     $newCpObj=new ClientPoint();
     //level0
-    $currentlevel=Level::where('value',0)->first();
-    $client->balance=$client->balance+$currentlevel->points+ $currentlevel->points;
+    $currentlevel=Level::orderBy('value')->first();
+   $client->balance=$client->balance+$currentlevel->points;
 $client->total_balance=$client->total_balance+$currentlevel->points;
     $newCpObj->points_sum = 1;
     $newCpObj->gift_sum = $currentlevel->points;
-    $newCpObj->category_id = $catmod->id;
+    $newCpObj->category_id =$category_id;
     $newCpObj->client_id =$client_id;
     $newCpObj->level_id =$currentlevel->id;
     $newCpObj->save();
+   //save level id in AnswersClient record
+    $newObj->level_id=$currentlevel->id;
+    $newObj->save();
+    if($currentlevel->points>0){
+        $notifylevel=1;
+    } 
     $giftpoints= $currentlevel->points;
 } 
 $client->save();
@@ -331,16 +341,24 @@ $client->save();
                         'result' => 1,
                         'correct_ans' => $anscorrect->id,
                         'notifylevel'=>$notifylevel,
-                        'pointslevel'=>$giftpoints,
+                        'giftpoints'=>$giftpoints,
                     ];
                 } else {
                     //wrong answer
+                    if($clpointmodel){
+                        $currentlevel=Level::orderBy('value')->first();
+                        $newObj->level_id = $currentlevel->id;
+                    }
+                    else{
+                        $newObj->level_id = $clpointmodel->level_id;
+                    }
+                    $newObj->save();
                     $resArr = [
                         'balance' => $client->balance,
                         'result' => 0,
                         'correct_ans' => $anscorrect->id,
                         'notifylevel'=>$notifylevel,
-                        'pointslevel'=>$giftpoints,
+                        'giftpoints'=>$giftpoints,
                     ];
                 }
             }

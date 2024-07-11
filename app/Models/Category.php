@@ -76,5 +76,8 @@ class Category extends Model
     {
         return $this->hasMany(Question::class,'category_id');
     }
-    
+    public function answersclients(): HasMany
+    {
+        return $this->hasMany(AnswersClient::class,'category_id');
+    }
 }
