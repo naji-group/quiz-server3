@@ -13,27 +13,27 @@
           @empty
           <div class="row ques-row">
             <div class="col-12 text-center mb-4">
-             <p>لايوجد اقسام</p>
+             <p>{{$sitedataCtrlr->gettrans($home_page,'no-sections')}}</p>
             </div>
           
           </div>
           @endforelse      
 		       <!-- قسم 2 -->
-               @if ($categories->first())
-               @if (Auth::guard('client')->check())
-               <div class="row ques-row">
-                   <div class="col-12 text-center mb-4">
-                    <p>اختر قسم وابدأ الاختبار</p>
-                   </div>
+            @if ($categories->first())
+              @if (Auth::guard('client')->check())
+                <div class="row ques-row">
+                  <div class="col-12 text-center mb-4">
+                    <p>{{$sitedataCtrlr->gettrans($home_page,'after-login')}}</p>
+                  </div>
                  
-                 </div>
-                 @else
-                 <div class="row ques-row">
-                   <div class="col-12 text-center mb-4">
-                    <p>سجل دخول لتستطيع المشاركة بالاختبار</p>
-                   </div>
+                </div>
+              @else
+                <div class="row ques-row">
+                  <div class="col-12 text-center mb-4">
+                    <p>{{$sitedataCtrlr->gettrans($home_page,'before-choose')}}</p>
+                  </div>
                  
-                 </div>
-               @endif 
-               @endif  
+                </div>
+              @endif 
+            @endif  
 		 
