@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\AnswersClient;
 use App\Models\Category;
+use App\Models\ClientPoint;
 use App\Models\Language;
+use App\Models\Level;
 use App\Models\Question;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -254,6 +256,8 @@ class QuestionController extends Controller
             $answer_id = $formdata['ans'];
             $ansmodel = Answer::where(['id' => $answer_id, 'question_id' => $question_id])->first();
             $anscorrect = Answer::where(['is_correct' => 1, 'question_id' => $question_id])->first();
+            $giftpoints=0;
+            $notifylevel=0;
             if ($ansmodel) {
                 //record the answer
                 $newObj = new AnswersClient();
@@ -268,24 +272,66 @@ class QuestionController extends Controller
                 $newObj->answer_type = $ansmodel->type;                     
                 // $newObj->question_file = $formdata['question_file'];
                 // $newObj->answer_file = $formdata['answer_file'];
-              //  $newObj->save();// temmmmmmmmmmmmmmmmmmmmmmmmmmp
+                $newObj->save();// temmmmmmmmmmmmmmmmmmmmmmmmmmp
                 $client=Client::find($client_id);
                 if ($ansmodel->is_correct == 1) {
                     // correct answer
+                    $client->balance = $client->balance + 1;
+                     
+                    $client->total_balance=$client->total_balance+1;
+                 
+                    // level check
+                  $catmod=Question::with('category')->find($question_id)->category;
 
-                  
-                  
-                    $newbalance = $client->balance + 1;
-                    $client->balance= $newbalance;
-                    $client->save();
-                    // Client::find($client_id)->update([
-                    //     'balance' => $newbalance,
-                    // ]);
-                   
+$clpointmodel= ClientPoint::where('client_id',$client_id)->where('category_id',$catmod->id)->orderByDesc('created_at')->first();
+
+if($clpointmodel){
+    $clpointmodel->points_sum= $clpointmodel->points_sum+1;
+    $clpointmodel->save();
+    $currentlevel=Level::find($clpointmodel->level_id);
+    $nextlevelval=$currentlevel->value+1;
+    $nextlevel=Level::where('value', $nextlevelval)->first();
+
+    if($clpointmodel->points_sum>= $nextlevel->answers_count){
+//move to next level
+//add new record
+$client->balance=$client->balance+$nextlevel->points;
+$client->total_balance=$client->total_balance+$nextlevel->points;
+$newCpObj=new ClientPoint();
+$newCpObj->points_sum = 0;
+$newCpObj->gift_sum = $nextlevel->points;
+$newCpObj->category_id = $catmod->id;
+$newCpObj->client_id =$client_id;
+$newCpObj->level_id = $nextlevel->id;
+$newCpObj->save();
+$giftpoints=$nextlevel->points;
+$notifylevel=1;
+    }
+
+
+
+}else{
+    $newCpObj=new ClientPoint();
+    //level0
+    $currentlevel=Level::where('value',0)->first();
+    $client->balance=$client->balance+$currentlevel->points+ $currentlevel->points;
+$client->total_balance=$client->total_balance+$currentlevel->points;
+    $newCpObj->points_sum = 1;
+    $newCpObj->gift_sum = $currentlevel->points;
+    $newCpObj->category_id = $catmod->id;
+    $newCpObj->client_id =$client_id;
+    $newCpObj->level_id =$currentlevel->id;
+    $newCpObj->save();
+    $giftpoints= $currentlevel->points;
+} 
+$client->save();
+                    //end level check                    
                     $resArr = [
                         'balance' => $client->balance,
                         'result' => 1,
                         'correct_ans' => $anscorrect->id,
+                        'notifylevel'=>$notifylevel,
+                        'pointslevel'=>$giftpoints,
                     ];
                 } else {
                     //wrong answer
@@ -293,6 +339,8 @@ class QuestionController extends Controller
                         'balance' => $client->balance,
                         'result' => 0,
                         'correct_ans' => $anscorrect->id,
+                        'notifylevel'=>$notifylevel,
+                        'pointslevel'=>$giftpoints,
                     ];
                 }
             }
