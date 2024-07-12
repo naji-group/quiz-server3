@@ -1,7 +1,7 @@
 /* تعديلات عامة */
 body {
   direction: rtl; /* اتجاه النص من اليمين لليسار */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* نوع الخط */
+  font-family: 'NotoKufiArabic','Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* نوع الخط */
   background-color: #ffffff; /* لون الخلفية الأبيض */
 }
 
@@ -352,6 +352,18 @@ height: 600px;
     text-align: center;
     margin-top: 1rem;
 }
+.txt-sec {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.main-content-sec{
+  margin-top:20px
+}
+.is-invalid{
+  padding-right: calc(1.5em + .75rem)!important;
+}
+
 
 /*  category*/
  
@@ -360,6 +372,11 @@ height: 600px;
       text-align: right;
       padding: 10px;
     }
+
+    @font-face {
+      font-family: NotoKufiArabic;
+      src:   url('../fonts/NotoKufiArabic-VariableFont_wght.ttf');
+      }
 
  
 

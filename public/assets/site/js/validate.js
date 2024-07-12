@@ -21,10 +21,39 @@
     }
     return true;
 }
+function  selValidatempty(input) {
+  
+    input.removeClass('is-invalid');
+
+    //var input = $(this);
+    // $("#" + key).addClass('parsley-error');
+    input.removeClass("is-invalid");
+  // input.nextAll(':has(.error):first').first().html("");
+   input.nextAll('.invalid-feedback').html("").hide();
+    if (!selRequired(input.val())) {
+        input.addClass('is-invalid');
+      //  input.nextAll(':has(.error):first').first().html(requiredmsg);
+        input.nextAll('.invalid-feedback').html(requiredmsg).show();
+        return false;
+    }
+    return true;
+}
 function required(inputtxt) {
 
     var empt = $.trim(inputtxt);
     if (empt == "") {
+        //alert("Please input a Value");
+        return false;
+    }
+    else {
+        //alert('Code has accepted : you can try another');
+        return true;
+    }
+}
+function selRequired(inputtxt) {
+
+    var empt = $.trim(inputtxt);
+    if (empt == "0") {
         //alert("Please input a Value");
         return false;
     }
