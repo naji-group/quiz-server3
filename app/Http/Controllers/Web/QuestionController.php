@@ -202,7 +202,7 @@ class QuestionController extends Controller
             if($catmodel->notes=='general'){
                 $queslist = Question::where('lang_id',$lang_id)
                 ->whereDoesntHave('answers.answersclients', function ($query) use ($client_id,$category_id) {
-                    $query->where('client_id', $client_id)//->where('category_id',$category_id)
+                    $query->where('client_id', $client_id)//->where('category_id',$category_id)//if we want not repeat ques from other cat
                     ;
                 })->select('id')->pluck('id');
             }else{
@@ -260,6 +260,7 @@ class QuestionController extends Controller
             $anscorrect = Answer::where(['is_correct' => 1, 'question_id' => $question_id])->first();
             $giftpoints=0;
             $notifylevel=0;
+            $levelnum=0;
             if ($ansmodel) {
                 //record the answer
                 $newObj = new AnswersClient();
@@ -295,22 +296,31 @@ if($clpointmodel){
     $newObj->save();
     $nextlevelval=$currentlevel->value+1;
     $nextlevel=Level::where('value', $nextlevelval)->first();
-
+if($nextlevel){
+    // next level exist
     if($clpointmodel->points_sum>= $nextlevel->answers_count){
-//move to next level
-//add new record
-$client->balance=$client->balance+$nextlevel->points;
-$client->total_balance=$client->total_balance+$nextlevel->points;
-$newCpObj=new ClientPoint();
-$newCpObj->points_sum = 0;
-$newCpObj->gift_sum = $nextlevel->points;
-$newCpObj->category_id = $category_id;
-$newCpObj->client_id =$client_id;
-$newCpObj->level_id = $nextlevel->id;
-$newCpObj->save();
-$giftpoints=$nextlevel->points;
-$notifylevel=1;
-    }
+        //move to next level
+        //add new record
+        $client->balance=$client->balance+$nextlevel->points;
+        $client->total_balance=$client->total_balance+$nextlevel->points;
+        $newCpObj=new ClientPoint();
+        $newCpObj->points_sum = 0;
+        $newCpObj->gift_sum = $nextlevel->points;
+        $newCpObj->category_id = $category_id;
+        $newCpObj->client_id =$client_id;
+        $newCpObj->level_id = $nextlevel->id;
+        $newCpObj->save();
+        $giftpoints=$nextlevel->points;
+        $notifylevel=1;
+        $levelnum= $nextlevel->value;
+            }
+}else{
+    //no next level
+
+    $notifylevel=2;
+
+}
+
 
 
 
@@ -333,6 +343,7 @@ $client->total_balance=$client->total_balance+$currentlevel->points;
         $notifylevel=1;
     } 
     $giftpoints= $currentlevel->points;
+    $levelnum= $currentlevel->value;
 } 
 $client->save();
                     //end level check                    
@@ -342,6 +353,8 @@ $client->save();
                         'correct_ans' => $anscorrect->id,
                         'notifylevel'=>$notifylevel,
                         'giftpoints'=>$giftpoints,
+                        'levelnum'=> $levelnum,
+                       
                     ];
                 } else {
                     //wrong answer
@@ -358,7 +371,7 @@ $client->save();
                         'result' => 0,
                         'correct_ans' => $anscorrect->id,
                         'notifylevel'=>$notifylevel,
-                        'giftpoints'=>$giftpoints,
+                       // 'giftpoints'=>$giftpoints,
                     ];
                 }
             }

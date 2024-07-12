@@ -1132,9 +1132,15 @@ class SiteDataController extends Controller
     {
         $tr_val="";
      if(isset($code)){
-        $tr_val=$tr_arr->where('title',$title)->where('code',$code)->first()['tr_title'];
+        if($tr_arr->where('title',$title)->where('code',$code)->first()){
+            $tr_val=$tr_arr->where('title',$title)->where('code',$code)->first()['tr_title'];
+        }
+        
      }else{
-        $tr_val=$tr_arr->where('title',$title)->first()['tr_title'];
+        if($tr_arr->where('title',$title)->first()){
+            $tr_val=$tr_arr->where('title',$title)->first()['tr_title'];
+        }
+       
      }
  
         return $tr_val;

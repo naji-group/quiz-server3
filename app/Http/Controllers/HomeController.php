@@ -144,7 +144,7 @@ else{
      $transarr=$sitedctrlr->FillTransData($lang);
      $defultlang=$transarr['langs']->first();
    //  $current_path=$sitedctrlr->getpath($lang,"categories"); 
-  
+   $home_page=$sitedctrlr->getbycode($defultlang->id,['home_page']);
      $catlist= $sitedctrlr-> getquescatbyloc('cats',$defultlang->id);
   // $cat= $sitedctrlr->getcatwithposts( $langitem->id,$slug);
    //$translateArr=   $sitedctrlr->gettranscat( $defultlang->id);
@@ -154,7 +154,8 @@ else{
 //    if($more_post){
 // $more=$more_post['tr_title'];
 //    }
-   return view('site.content.categories',['categories'=>$catlist,'transarr'=>$transarr,'lang'=>$lang,'defultlang'=>$defultlang ]);   
+   return view('site.content.categories',['categories'=>$catlist,'transarr'=>$transarr,'lang'=>$lang,'defultlang'=>$defultlang
+   ,'home_page'=>$home_page ,'sitedataCtrlr'=>$sitedctrlr,]);   
     }
 
 

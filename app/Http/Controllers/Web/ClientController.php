@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnswersClient;
+use App\Models\ClientPoint;
+use App\Models\PointTrans;
 use App\Models\SocialModel;
 use Illuminate\Http\Request;
 use App\Models\Client;
@@ -148,17 +151,20 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($lang)
     {
         if(Auth::guard('client')->check()){
 $id=Auth::guard('client')->user()->id;
 $client=Client::find($id);
 $client->birthdateStr= (string)Carbon::create($client->birthdate)->format('Y-m-d');
- //return response()->json($this->getsocial($id));
- 
- $client_url=$this->getclient_url($client->user_name);
- 
-return view("site.client.edit", ["client" => $client,"socials" => $this->getsocial($id),"client_url" =>$client_url]);
+ //return response()->json($this->getsocial($id));  
+  $sitedctrlr=new SiteDataController(); 
+      $transarr=$sitedctrlr->FillTransData($lang);
+
+      $defultlang=$transarr['langs']->first();
+      $profile=$sitedctrlr->getbycode($defultlang->id,['profile','register']);
+return view("site.client.edit", ["client" => $client,'transarr'=>$transarr,'lang'=>$lang,'defultlang'=>$defultlang
+,'profile'=>$profile,'sitedataCtrlr'=>$sitedctrlr]);
    
         }else{
                return redirect()->route('login.client');
@@ -305,24 +311,16 @@ $res = ClientSocial::updateOrCreate(
          ) ;
         
          if ($validator->fails()) {  
-                                 
-       //return redirect()->with('errors',$validator)->json();
-        return response()->json($validator);
-     
-          // return redirect() 
-          // ->back()
-          // ->withErrors($validator,'infoform' )
-          
-          // ->withInput();
-     
-         } else {    
+   
+        return response()->json($validator); 
+           } else {    
        
          
            $id=Auth::guard('client')->user()->id;
            Client::find($id)->update([    
     'name' => $formdata['name'],  
-    'desc' => $formdata['desc'],         
-    'birthdate' => $formdata['birthdate'], 
+    // 'desc' => $formdata['desc'],         
+    // 'birthdate' => $formdata['birthdate'], 
     'gender' => $formdata['gender'], 
     'country' => $formdata['country'], 
   ]); 
@@ -350,23 +348,15 @@ $res = ClientSocial::updateOrCreate(
          );
      
          if ($validator->fails()) {
-    
-                                
-       //return redirect()->with('errors',$validator)->json();
-       //   return response()->json($validator);
-          return redirect()
-          ->back()
-          ->withErrors($validator)
-          ->withInput();
-     
+          return response()->json($validator);      
          } else {    
            $id=Auth::guard('client')->user()->id;
            Client::find($id)->update([
     
     'password' => bcrypt($formdata['password']),      
   ]);         
-           return redirect()->back();
-          // return response()->json("ok");
+         //  return redirect()->back();
+          return response()->json("ok");
          }
     }
     
@@ -385,18 +375,22 @@ $res = ClientSocial::updateOrCreate(
         $oldimagename =$item->image;
         $strgCtrlr = new StorageController();
         $path = $strgCtrlr->path['clients'];
-        Storage::delete("public/" .$path. '/' . $oldimagename);        
+        Storage::delete("public/" .$path. '/' . $oldimagename);    
+
         //delete   MediaPost records
-        ClientSocial::where('client_id',$id)->delete();
+       // ClientSocial::where('client_id',$id)->delete();
        // MessageModel::where('sender_id',$id)->orWhere('recipient_id',$id)->delete();
+       AnswersClient::where('client_id',$id)->delete();
+        ClientPoint::where('client_id',$id)->delete();
+         PointTrans::where('client_id',$id)->delete();
         Client::find($id)->delete();
         Auth::guard('client')->logout();
-        return redirect()->route('site.home');
+        return response()->json("ok");
       }else{
-        return redirect()->back();
+        return response()->json("error");
       }
     }else{
-        return redirect()->back();
+      return response()->json("error");
       }
     }
     public function logout(Request $request): RedirectResponse

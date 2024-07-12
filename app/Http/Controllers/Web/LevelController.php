@@ -121,4 +121,15 @@ class LevelController extends Controller
       return redirect()->back();
   
     }
+    public function clientlevel( )
+    {     
+      //delete 
+      if(Auth::guard('client')->check())
+      $level=
+     $client_id= Auth::guard('client')->user()->id;
+
+     // $item = Level::find($id);
+      
+       
+    }
 }

@@ -384,8 +384,14 @@ Route::prefix('{lang}')->group(function () {
     });
 });
 Route::  middleware(['auth:client', 'verified'])->group(function () {
+  
     Route::post('u/logout', [ClientController::class, 'logout'])->name('logout.client');
+  //account
+    Route::post('u/delete', [ClientController::class, 'destroy']) ;
+    Route::post('/updatepass', [ClientController::class, 'updatepass'])->name('client.updatepass');
+    Route::post('/update', [ClientController::class, 'update'])->name('client.update');
 
+    
     Route::prefix('{lang}')->group(function () {
     Route::get('/account', [ClientController::class, 'edit'])->name('client.account');
    Route::get('/quiz/{slug}', [HomeController::class, 'getcategory']);
