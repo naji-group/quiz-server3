@@ -55,7 +55,7 @@ $(document).ready(function() {
 		}
 	});
 
-	
+
 
    //register form 
    $('#btn-delete').on('click', function (e) {
@@ -66,14 +66,14 @@ var formid = $(this).closest("form").attr('id');
  
 	
 });
-   $('.btn-submit').on('click', function (e) {
-		e.preventDefault();
-if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($("#email"),"Must be email") && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
-    var formid = $(this).closest("form").attr('id');
-		sendform('#' + formid);
-}
+//    $('.btn-submit').on('click', function (e) {
+// 		e.preventDefault();
+// if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($("#email"),"Must be email") && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
+//     var formid = $(this).closest("form").attr('id');
+// 		sendform('#' + formid);
+// }
 		
-	});
+// 	});
 	$('#btn-pass').on('click', function (e) {
 		e.preventDefault();
 if(validatempty($("#old_password"))  && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
@@ -91,6 +91,7 @@ if(validatempty($("#name")) && selValidatempty($("#country")) && selValidatempty
 }
 		
 	});
+
 	function ClearErrors() {
 		$("." + "invalid-feedback").html('').hide();
 		$('.is-invalid').removeClass('is-invalid');
@@ -140,7 +141,108 @@ if(validatempty($("#name")) && selValidatempty($("#country")) && selValidatempty
 	}
 
    //end register
+   	//pull
+	$("#points").focusout(function (e) {
+		
+		if (!validatempty($(this))) {
+			return false;
+		} else {
+			if( allnumeric($(this).val())){
+				var cash=$(this).val()/arrdata.pointsrate;
+				$('#coin-value').text(cash);
+			}
+			
+			return true;
+		}
+	});
+	$('#btn-pull').on('click', function (e) {
+		e.preventDefault();
+if(validatempty($("#points"))){
+    var formid = $(this).closest("form").attr('id');
+	sendpullform('#' + formid);
+}
+		
+	});
+
    
+   function sendpullform(formid) {
+	ClearErrors();
+	var form = $(formid)[0];
+	var formData = new FormData(form);
+	urlval = $(formid).attr("action");
+	$.ajax({
+		url: urlval,
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,
+
+		success: function (data) {
+			if (data.length == 0) {
+				noteError();
+			} else if (data == "ok") {	
+				resetForm();
+loadpointdata();
+					noteSuccess(); 	
+
+	 
+			} else {
+				noteError();
+			}
+
+		}, error: function (errorresult) {
+			var response = $.parseJSON(errorresult.responseText);
+			noteError();
+			$.each(response.errors, function (key, val) {
+			//	$("#" + "info-form-error").append('<li class="text-danger">' + val[0] + '</li>');
+				$("#" + key + "-error").addClass('invalid-feedback').text(val[0]).show();
+				$("#" + key).addClass('is-invalid');
+			});
+
+		}, finally: function () {		 
+
+		}
+	});
+}
+
+function loadpointdata() {
+ 
+ 
+	$.ajax({
+		url: urlval,
+		type: "GET",
+
+	 
+		success: function (data) {
+		 
+
+			if (data.length == 0) {
+				//	noteError();
+			} else {
+				arrdata=data; 
+				if(arrdata.balance<arrdata.minpoints){
+$('#pull-form').hide();
+$('#balance-msg').show();
+
+				}else{
+					$('#pull-form').show();	
+					$('#balance-msg').hide();	
+				}
+$('#pointbalance-value').text(arrdata.balance);
+$('#u-balance').text(arrdata.balance);
+			}
+
+		}, error: function (errorresult) {
+		 
+			var response = $.parseJSON(errorresult.responseText);
+			 	
+		}, finally: function () {
+			 
+
+		}
+	});
+}
+loadpointdata() ;
   });
   function noteSuccess() {
     swal ("تمت العملية بنجاح");
@@ -151,3 +253,12 @@ if(validatempty($("#name")) && selValidatempty($("#country")) && selValidatempty
   function noteError() {
     swal("لم تنجح العملية");
   }
+  function resetForm() {
+	jQuery('#pull-form')[0].reset();
+
+
+	/*
+	$('#imgshow').attr("src", emptyimg);
+	$('#iconshow').attr("src", emptyimg);
+	*/
+}

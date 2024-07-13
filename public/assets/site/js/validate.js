@@ -31,7 +31,7 @@ function  selValidatempty(input) {
   // input.nextAll(':has(.error):first').first().html("");
    input.nextAll('.invalid-feedback').html("").hide();
     if (!selRequired(input.val())) {
-        input.addClass('is-invalid');
+        input.addClass('is-invalid').style;
       //  input.nextAll(':has(.error):first').first().html(requiredmsg);
         input.nextAll('.invalid-feedback').html(requiredmsg).show();
         return false;

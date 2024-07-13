@@ -7,14 +7,13 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations. add_pointsrate_to_points_trans_table
+     * Run the migrations.
      */
     public function up(): void
     {
-        Schema::table('answers_clients', function (Blueprint $table) {
-            //category_id
-            $table->foreignId('category_id')->nullable();
-
+        Schema::table('points_trans', function (Blueprint $table) {
+            $table->integer('pointsrate')->nullable()->default(0);
+            $table->decimal('cash')->nullable()->default(0);
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('answers_clients', function (Blueprint $table) {
+        Schema::table('points_trans', function (Blueprint $table) {
             //
         });
     }

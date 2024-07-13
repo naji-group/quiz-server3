@@ -657,7 +657,24 @@ class SettingController extends Controller
   }
 
   //Question settting
+//get ques setting
+public function getquessetting()
+{
+  $List = Setting::select(
+    'id',
+    'name1',
+    'value1',
+    'category',
+    'dep',
+    'is_active',
+  )->where('category', 'question')->get();
 
+  $minpoints = $List->where('dep', 'minpoints')->first();
+
+  $pointsrate = $List->where('dep', 'pointsrate')->first();
+  return ['minpoints'=> $minpoints->value1,
+  'pointsrate'=>$pointsrate->value1];
+}
   public function quessetting()
   {
 

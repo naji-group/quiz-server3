@@ -13,16 +13,15 @@
           <ul class="navbar-nav mr-auto">
             @if (Auth::guard('client')->check())
             <li  class="nav-item dropdown " >
-
                 <a  class="nav-link dropdown-toggle nav-link-pad" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{$sitedataCtrlr->gettrans($h_menu,'welcome')}} {{ Auth::guard('client')->user()->name }}</a>
                 <div class="dropdown-menu" aria-labelledby="accountDropdown">
                     <a class="dropdown-item" href="{{ route('client.account',$lang)  }}">{{$sitedataCtrlr->gettrans($h_menu,'profile')}}</a>
+                    <a class="dropdown-item" href="{{ url($lang,'myscore')}}">نقاطي</a>
 
                     <form method="POST" action="{{ route('logout.client') }}"  >
                         @csrf
                     <a class="dropdown-item" href="#"  onclick="event.preventDefault();  this.closest('form').submit();">{{$sitedataCtrlr->gettrans($h_menu,'logout')}}</a>
                 </form> 
-
                   </div>
             </li>
               <li class="nav-item  ">

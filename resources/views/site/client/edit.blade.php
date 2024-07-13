@@ -101,6 +101,31 @@
                     </div>
                 </div>
 
+                  <!-- سحب رصيد   -->
+                  <div class="row main-content main-content-sec justify-content-center ">
+                    <div class="col-md-12">
+                        <div class="card login-card">
+                            <div class="card-body  bg-style ">
+                                <h3 class="card-title text-center">سحب رصيد</h3>
+                                <form action ="{{ url('pull') }}" method="POST" name="pull-form" style="display: none;"
+                                    id="pull-form" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="points">النقاط</label>
+                                        <input type="text" class="form-control" id="points" name="points" value=""
+                                            placeholder="ادخل عدد النقاط المطلوب سحبها">
+                                        <div id="points-error" class="invalid-feedback"> .</div>
+                                        <div id="pointbalance"><span>رصيدك:</span><span id="pointbalance-value" ></span><span></span></div>
+                                        <div id="coin"  ><span>القيمة:</span><span id="coin-value" ></span><span></span></div>
+                                    </div> 
+                                    <button type="submit" id="btn-pull" class="btn btn-primary btn-block">سحب</button>
+                                </form>
+<p id="balance-msg" class="text-center" style="display: none;"> الرصيد غير كافي</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
   <!--  حذف الحساب -->
   <div class="row main-content main-content-sec justify-content-center ">
     <div class="col-md-12">
@@ -138,5 +163,7 @@
     <script>
         var countryurl = "{{ URL::asset('assets/site/js/countries/' . $lang . '/countries.json') }}";
         var selcntry = "{{ $client->country }}";
+         var urlval = "{{ url('balanceinfo') }}";
+        var arrdata;
     </script>
 @endsection

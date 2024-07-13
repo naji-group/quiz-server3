@@ -852,15 +852,15 @@ class SiteDataController extends Controller
     public function gethomedata($lang_id)
     {        //projects and refs
         $ref = Category::where('code', 'references')->where('status', 1)->first();
-        $main_banner = $this->getcatbycode($lang_id, 'main-banner');
-        $project_banner = $this->getcatbycode($lang_id, 'project-banner');
+      //  $main_banner = $this->getcatbycode($lang_id, 'main-banner');
+       // $project_banner = $this->getcatbycode($lang_id, 'project-banner');
         if ($ref) {
             $ref = $this->getcatwithposts($lang_id, $ref->slug);
         }
         $homearr = [
             "references" => $ref,
-            "main_banner" => $main_banner,
-            "project_banner" => $project_banner,
+        //    "main_banner" => $main_banner,
+           // "project_banner" => $project_banner,
         ];
         return $homearr;
     }

@@ -16,7 +16,8 @@ class PointTrans extends Model
         'level_id',
         'client_id',
         'category_id',
-
+'pointsrate',
+'cash'
     ];
   
     public function level(): BelongsTo

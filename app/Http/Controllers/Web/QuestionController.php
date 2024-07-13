@@ -276,7 +276,7 @@ class QuestionController extends Controller
                 $newObj->answer_type = $ansmodel->type;                     
                 // $newObj->question_file = $formdata['question_file'];
                 // $newObj->answer_file = $formdata['answer_file'];
-                $newObj->save();// temmmmmmmmmmmmmmmmmmmmmmmmmmp
+                $newObj->save();// tem 
                 $client=Client::find($client_id);
                
                 $clpointmodel= ClientPoint::where('client_id',$client_id)->where('category_id',$category_id)->orderByDesc('created_at')->first();
@@ -310,20 +310,25 @@ if($nextlevel){
         $newCpObj->client_id =$client_id;
         $newCpObj->level_id = $nextlevel->id;
         $newCpObj->save();
+        //add answerclient record for gift
+        $giftObj = new AnswersClient();
+        $giftObj->is_correct =1;
+        $giftObj->points = $nextlevel->points;
+        $giftObj->client_id = $client_id;
+       // $newObj->answer_id = $answer_id;
+        $giftObj->category_id = $category_id;
+          $giftObj->level_id = $nextlevel->id ;
+        $giftObj->question_type ='gift';      
+        $giftObj->save();
+
         $giftpoints=$nextlevel->points;
         $notifylevel=1;
         $levelnum= $nextlevel->value;
             }
 }else{
     //no next level
-
     $notifylevel=2;
-
 }
-
-
-
-
 }else{
     $newCpObj=new ClientPoint();
     //level0
@@ -341,6 +346,16 @@ $client->total_balance=$client->total_balance+$currentlevel->points;
     $newObj->save();
     if($currentlevel->points>0){
         $notifylevel=1;
+   //add answerclient record for gift
+        $giftObj = new AnswersClient();
+        $giftObj->is_correct =1;
+        $giftObj->points =$currentlevel->points;
+        $giftObj->client_id = $client_id;
+      
+        $giftObj->category_id = $category_id;
+          $giftObj->level_id =$currentlevel->id;
+        $giftObj->question_type ='gift';      
+        $giftObj->save();
     } 
     $giftpoints= $currentlevel->points;
     $levelnum= $currentlevel->value;
@@ -353,8 +368,7 @@ $client->save();
                         'correct_ans' => $anscorrect->id,
                         'notifylevel'=>$notifylevel,
                         'giftpoints'=>$giftpoints,
-                        'levelnum'=> $levelnum,
-                       
+                        'levelnum'=> $levelnum,                       
                     ];
                 } else {
                     //wrong answer

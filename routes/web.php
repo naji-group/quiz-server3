@@ -128,20 +128,20 @@ Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () 
             Route::post('/updatetitle', [SettingController::class, 'updatetitle']);
             Route::post('/updatefav', [SettingController::class, 'updatefav']);
             Route::post('/updatelogo', [SettingController::class, 'updatelogo']);
-            Route::post('/updatewhats', [SettingController::class, 'updatewhats']);
+           // Route::post('/updatewhats', [SettingController::class, 'updatewhats']);
             Route::post('/updatelocation', [SettingController::class, 'updatelocation']);
             Route::post('/updatecontactemail', [SettingController::class, 'updatecontactemail']);
             //social
-            Route::get('/getsocial', [SettingController::class, 'getsocial'])->name('setting.getsocial');
-            Route::get('/createsocial', [SettingController::class, 'createsocial']);
-            Route::post('/storesocial', [SettingController::class, 'storesocial']);
-            Route::get('/editsocial/{id}', [SettingController::class, 'editsocial']);
+            // Route::get('/getsocial', [SettingController::class, 'getsocial'])->name('setting.getsocial');
+            // Route::get('/createsocial', [SettingController::class, 'createsocial']);
+            // Route::post('/storesocial', [SettingController::class, 'storesocial']);
+            // Route::get('/editsocial/{id}', [SettingController::class, 'editsocial']);
           //  Route::post('/updatesocial/{id}', [SettingController::class, 'updatesocial']);
-            Route::delete('/delsocial/{id}', [SettingController::class, 'delsocial']);
+            // Route::delete('/delsocial/{id}', [SettingController::class, 'delsocial']);
             //header contact
   
-            Route::post('/updatephone', [SettingController::class, 'updatephone']);
-            Route::post('/updateemail', [SettingController::class, 'updateemail']);
+            // Route::post('/updatephone', [SettingController::class, 'updatephone']);
+            // Route::post('/updateemail', [SettingController::class, 'updateemail']);
             Route::get('/translate', [TranslateController::class, 'translate']);
 ///////////////////////// saraha
             Route::get('/general', [SettingController::class, 'index']);
@@ -371,6 +371,7 @@ Route::middleware('auth')->group(function () {
 Route::get('{lang}/categories', [HomeController::class, 'getcategories']);
 Route::prefix('{lang}')->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
+    Route::get('/scores', [ClientController::class, 'scores']);
     //Route::get('/{slug}', [ClientController::class, 'send_message']);
     Route::middleware('guest:client')->group(function () {
         Route::get('/register', [ClientController::class, 'create'])->name('register.client');
@@ -383,6 +384,7 @@ Route::prefix('{lang}')->group(function () {
 
     });
 });
+
 Route::  middleware(['auth:client', 'verified'])->group(function () {
   
     Route::post('u/logout', [ClientController::class, 'logout'])->name('logout.client');
@@ -390,10 +392,14 @@ Route::  middleware(['auth:client', 'verified'])->group(function () {
     Route::post('u/delete', [ClientController::class, 'destroy']) ;
     Route::post('/updatepass', [ClientController::class, 'updatepass'])->name('client.updatepass');
     Route::post('/update', [ClientController::class, 'update'])->name('client.update');
+    Route::post('/pull', [ClientController::class, 'pull']);
+    Route::get('/balanceinfo', [ClientController::class, 'balanceinfo']);
 
-    
     Route::prefix('{lang}')->group(function () {
+        //account
     Route::get('/account', [ClientController::class, 'edit'])->name('client.account');
+//my score
+Route::get('/myscore', [ClientController::class, 'myscore']);
    Route::get('/quiz/{slug}', [HomeController::class, 'getcategory']);
    Route::post('/send', [QuestionController::class, 'sendquiz']);
    Route::post('/checkans', [QuestionController::class, 'checkanswer']);
