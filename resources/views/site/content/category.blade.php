@@ -70,8 +70,16 @@
 <script src="{{ url('assets/site/js/sweetalert.min.js') }}"></script>
  
 <script src="{{ url('assets/site/js/quiz.js') }}"></script>
+ 
 <script  >
+var correct_answer= "{{$sitedataCtrlr->gettrans($quiz,'correct-answer')}}";
+var wrong_answer="{{$sitedataCtrlr->gettrans($quiz,'wrong-answer')}}";
+var nextlevel_msg="{{$sitedataCtrlr->gettrans($quiz,'nextlevel-msg')}}";
+var no_questions="{{$sitedataCtrlr->gettrans($quiz,'no-questions')}}";
+
 var cat={{ $catquis['id'] }};
+
+
 $(document).ready(function() {
   
    

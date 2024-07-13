@@ -1,5 +1,7 @@
 var valid = true;
 var quesid = '';
+ 
+
 $(document).ready(function () {
 
 
@@ -88,8 +90,9 @@ $(document).ready(function () {
 						$('#u-balance').text(data.balance);
 						noteSuccess();
 						if (data.notifylevel == 1) {
-
-							swal(" مبروك لقد انتقلت الى المستوى " + data.levelnum + " وحصلت على " + data.giftpoints + "نقاط هدية");
+var tmp_nextmsg=nextlevel_msg;
+tmp_nextmsg=tmp_nextmsg.replace("level-num", data.levelnum).replace("gift-points",data.giftpoints);
+							swal(tmp_nextmsg);
 						}
 					} else {
 						noteError();
@@ -152,11 +155,11 @@ $(document).ready(function () {
 	// end click
 });
 function noteSuccess() {
-	swal("صح ");
+	swal(correct_answer);
 }
 function noteError() {
-	swal("خطا");
+	swal(wrong_answer);
 }
 function noteErrorempty() {
-	swal("لايوجد اسئلة");
+	swal(no_questions);
 }
