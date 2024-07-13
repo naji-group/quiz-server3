@@ -228,7 +228,7 @@ class ClientController extends Controller
         $catarr[] = $newarr;
       }
       // return dd($catarr);
-      $translate = $sitedctrlr->getbycode($defultlang->id, ['profile']);//chang
+      $translate = $sitedctrlr->getbycode($defultlang->id, ['my-score','header','public-score','home_page']);//chang
       return view(
         "site.client.score",
         [
@@ -306,7 +306,7 @@ class ClientController extends Controller
     //high balance client
     $firstclient = Client::orderByDesc('total_balance')->select('id', 'name', 'image', 'total_balance')->first();
     // return dd($catarr);
-    $translate = $sitedctrlr->getbycode($defultlang->id, ['profile']);//chang
+    $translate = $sitedctrlr->getbycode($defultlang->id, ['footer-menu','public-score','home_page']);//chang
     return view(
       "site.content.score",
       [
@@ -322,50 +322,8 @@ class ClientController extends Controller
 
   }
 
-  public function getclient_url($slug)
-  {
-
-    /* Get Base URL using URL Facade */
-    $url = URL::to("/");
-    $url = $url . '/u' . '/' . $slug;
-    /* Get Base URL using url() helper */
-    //  $url2 = url('/');
-    $href = preg_replace("(^https?://)", "", $url);
-    $arr = [
-      'href_client' => $href,
-      'link_client' => $url,
-    ];
-    return $arr;
-  }
-  public function getsocial($client_id)
-  {
-    $social_list = SocialModel::where('is_active', 1)->with([
-      'clientsocials' => function ($q) use ($client_id) {
-        $q->where('client_id', $client_id);
-      }
-    ])->get();
-
-
-    return $social_list;
-  }
-
-  public function updatesocial(Request $request)
-  {
-    $formdata = $request->all(); {
-
-
-      $id = Auth::guard('client')->user()->id;
-
-      foreach ($formdata['social'] as $key => $val) {
-        $res = ClientSocial::updateOrCreate(
-          ['client_id' => $id, 'social_id' => $key],
-          ['link' => $val, 'is_active' => 1]
-        );
-      }
-
-      return response()->json("ok");
-    }
-  }
+   
+ 
   /**
    * Update the specified resource in storage.
    */
@@ -460,11 +418,11 @@ class ClientController extends Controller
           $transObj->client_id = $id;
           $transObj->pointsrate = $set_arr['pointsrate'];
           $transObj->cash = $this->CalcCash($pull_points, $set_arr['pointsrate']);
-           $transObj->save(); //temmmmmmp 
+           $transObj->save();  
           //update client balance
           $clint = Client::find($id);
           $clint->balance -= $pull_points;
-           $clint->save();  //temmmmmmp 
+           $clint->save();   
         }
         //  return redirect()->back();
         return response()->json("ok");

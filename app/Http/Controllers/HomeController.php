@@ -144,7 +144,7 @@ else{
      $transarr=$sitedctrlr->FillTransData($lang);
      $defultlang=$transarr['langs']->first();
    //  $current_path=$sitedctrlr->getpath($lang,"categories"); 
-   $home_page=$sitedctrlr->getbycode($defultlang->id,['home_page']);
+   $home_page=$sitedctrlr->getbycode($defultlang->id,['home_page','footer-menu']);
      $catlist= $sitedctrlr-> getquescatbyloc('cats',$defultlang->id);
   // $cat= $sitedctrlr->getcatwithposts( $langitem->id,$slug);
    //$translateArr=   $sitedctrlr->gettranscat( $defultlang->id);

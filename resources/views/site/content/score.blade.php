@@ -5,7 +5,7 @@
             <main role="main" class="col-12 col-lg-10 px-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">{{ $sitedataCtrlr->gettrans($translate, 'page-title') }}</h1>
+                    <h1 class="h2">{{ $sitedataCtrlr->gettrans($translate, 'scores') }}</h1>
                 </div>
 
                 <!-- محتوى الصفحة -->
@@ -23,16 +23,16 @@
    <div class="card-container">
     
     <div class="scard text-center animate__animated ">
-        <h2>اعلى ترتيب</h2>
+        <h2>{{ $sitedataCtrlr->gettrans($translate, 'high-score') }}</h2>
         <p> {{ $cat['total_score']['client_name'] }}</p>
-        <p><span>المستوى</span> : <span>{{ $cat['total_score']['level'] }}</span> </p>
-        <p><span>مجموع النقاط</span> : <span>{{ $cat['total_score']['cat_score'] }}</span> </p>
+        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> : <span>{{ $cat['total_score']['level'] }}</span> </p>
+        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $cat['total_score']['cat_score'] }}</span> </p>
     </div>
     <div class="scard text-center animate__animated">
-        <h2>الاعلى هذا الشهر</h2>
+        <h2>{{ $sitedataCtrlr->gettrans($translate, 'month-score') }}</h2>
         <p> {{ $cat['month_score']['client_name'] }}</p>
-        <p><span>المستوى</span> : <span>{{ $cat['month_score']['level'] }}</span> </p>
-        <p><span>مجموع النقاط</span> : <span>{{ $cat['month_score']['cat_score'] }}</span> </p>
+        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> : <span>{{ $cat['month_score']['level'] }}</span> </p>
+        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $cat['month_score']['cat_score'] }}</span> </p>
     </div>
    
 </div>
@@ -45,18 +45,18 @@
 </div>
 
 @empty
-<p> لايوجد اختبارات</p>
+<p>{{ $sitedataCtrlr->gettrans($translate, 'no-sections') }}</p>
 @endforelse
                          
                                 <div class="card-body  bg-style">
-                                    <h3 class="card-title text-center">اعلى نقاط</h3>
+                                    <h3 class="card-title text-center">{{ $sitedataCtrlr->gettrans($translate, 'first-place') }}</h3>
                                    <!-- محتوى الصفحة -->
                                    <div class="card-container">
                                     
                                     <div class="scard  scard-one text-center animate__animated">
                                         <h2> {{ $first_client->name }}</h2>
                                     
-                                        <p><span>مجموع النقاط</span> : <span>{{ $first_client->total_balance }}</span> </p>
+                                        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $first_client->total_balance }}</span> </p>
                                     </div>
                                    
                                    

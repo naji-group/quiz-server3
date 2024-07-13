@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-12 mt-2 mb-2">
-                                            <label for="" class="policy-form">
+                                            <label  class="policy-form">
                                                 <span class="policy">
                                                     {{ $sitedataCtrlr->gettrans($register, 'policy') }}
                                                     <a href="#"
