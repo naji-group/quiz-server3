@@ -1,5 +1,5 @@
- var  requiredmsg = 'This field is required.';
- var  emailmsg ='This field must be Email';
+ var  requiredmsg = input_required;
+ var  emailmsg =input_email;
  //var  requiredmsg = 'هذا الحقل مطلوب';
  //var  emailmsg ='هذا الحقل يجب ان يكون عنوان بريد الكتروني';
  

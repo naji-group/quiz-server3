@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 		//	return true;
 		}
-		if (!validateinputemail($(this),"Must be email")) {
+		if (!validateinputemail($(this),emailmsg)) {
 			return false;
 		} else {
 			return true;
@@ -72,7 +72,7 @@ $(document).ready(function() {
    //register form 
    $('.btn-submit').on('click', function (e) {
 		e.preventDefault();
-if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($("#email"),"Must be email") && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
+if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($("#email"),emailmsg) && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
     var formid = $(this).closest("form").attr('id');
 		sendform('#' + formid);
 }
@@ -126,8 +126,8 @@ if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($
    
   });
   function noteSuccess() {
-    swal("تم انشاء الحساب بنجاح");
+    swal(success_msg);
   }
   function noteError() {
-    swal("لم يتم انشاء الحساب");
+    swal(fail_msg);
   }

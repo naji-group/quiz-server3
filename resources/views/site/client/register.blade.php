@@ -84,7 +84,17 @@
     </div>
 @endsection
 @section('js')
+<script>
+    var input_required= "{{$sitedataCtrlr->gettrans($register,'required')}}";
+    var input_email= "{{$sitedataCtrlr->gettrans($register,'input-email')}}";
+    var success_msg= "{{$sitedataCtrlr->gettrans($register,'success-register')}}";
+    var fail_msg= "{{$sitedataCtrlr->gettrans($register,'fail-register')}}";
+    
+</script>
     <script src="{{ url('assets/site/js/sweetalert.min.js') }}"></script>
     <script src="{{ url('assets/site/js/validate.js') }}"></script>
     <script src="{{ url('assets/site/js/register.js') }}"></script>
+
+     
+
 @endsection

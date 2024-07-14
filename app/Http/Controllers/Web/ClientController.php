@@ -53,13 +53,12 @@ class ClientController extends Controller
     $transarr = $sitedctrlr->FillTransData($lang);
     $defultlang = $transarr['langs']->first();
 
-    $register = $sitedctrlr->getbycode($defultlang->id, ['register']);
+    $register = $sitedctrlr->getbycode($defultlang->id, ['register','register-error']);
 
     return view('site.client.register', [
       'transarr' => $transarr,
       'lang' => $lang,
-      'defultlang' => $defultlang
-      ,
+      'defultlang' => $defultlang,
       'register' => $register,
       'sitedataCtrlr' => $sitedctrlr
     ]);
@@ -75,8 +74,7 @@ class ClientController extends Controller
     return view('site.client.login', [
       'transarr' => $transarr,
       'lang' => $lang,
-      'defultlang' => $defultlang
-      ,
+      'defultlang' => $defultlang,
       'login' => $login,
       'sitedataCtrlr' => $sitedctrlr
     ]);
@@ -99,7 +97,7 @@ class ClientController extends Controller
    */
   public function store(StoreClientRequest $request, $lang)//StoreClientRequest
   {
-
+    StoreClientRequest::$lang=$lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
