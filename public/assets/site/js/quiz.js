@@ -8,7 +8,7 @@ $(document).ready(function () {
 	//start form 
 	$('#start-button').on('click', function (e) {
 		e.preventDefault();
-		$(this).hide(500);
+		//$(this).hide(500);
 		var formid = $(this).closest("form").attr('id');
 		sendform('#' + formid);
 
@@ -125,6 +125,7 @@ tmp_nextmsg=tmp_nextmsg.replace("level-num", data.levelnum).replace("gift-points
 		  
 		 */
 	});
+	
 	function clickstart() {
 		$('#start-button').trigger('click');
 	}
@@ -153,6 +154,7 @@ tmp_nextmsg=tmp_nextmsg.replace("level-num", data.levelnum).replace("gift-points
 	}
 
 	// end click
+	clickstart();
 });
 function noteSuccess() {
 	swal(correct_answer);

@@ -5,9 +5,9 @@
      <div class="container-fluid content">
       <div class="row justify-content-center">
         <main role="main" class="col-12 col-lg-10 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          {{-- <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h2 class="h2"><span>{{$sitedataCtrlr->gettrans($quiz,'tests')}}</span>/<span>{{ $catquis['tr_title'] }}</span></h2>   
-          </div>
+          </div> --}}
           <!-- محتوى الصفحة -->
           <div class="row main-content">
 
@@ -32,7 +32,7 @@
              <!-- قسم الأسئلة -->
           <div class="row ques-row">
             <div class="col-12 text-center mb-4">
-              <form   action ="{{ url($lang,'send') }}" method="POST"  name="send-form"   id="send-form">
+              <form   action ="{{ url($lang,'send') }}" method="POST"  name="send-form"  id="send-form" style="display: none;">
                 @csrf
                <input type="hidden" name="cat" value="{{ $catquis['id'] }}">
                <input type="hidden" name="lang" value="{{ $defultlang->id }}">            

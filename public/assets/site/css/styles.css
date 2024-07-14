@@ -267,10 +267,17 @@ body {
 }
 .ques-row{
 width:100%;
-height: 600px;
+height: 550px;
 align-content: flex-start;
 
 }
+.sec-row{
+  width:100%;
+  margin: 0px;
+
+  align-content: flex-start;
+  
+  }
 .list-group-item-default{
 	 background-color:#0866FF;
 	  color:#FFFFFF;

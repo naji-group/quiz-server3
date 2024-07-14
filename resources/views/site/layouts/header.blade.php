@@ -36,6 +36,9 @@
               </li>
             @endif
          
+                {{-- start lang--}}
+                @if ( $transarr['langs']->count()>1)
+                  
              
             <li class="nav-item dropdown ">
               <a class="nav-link dropdown-toggle nav-link-pad" href="#" id="languageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,7 +57,8 @@
                 @endforeach
               </div>
             </li>
-           
+            @endif
+           {{-- end lang--}}
 
 
           </ul>
