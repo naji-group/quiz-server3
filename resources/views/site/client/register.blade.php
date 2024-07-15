@@ -70,7 +70,7 @@
                                 <div class="sec">
                                     <p>
                                         {{ $sitedataCtrlr->gettrans($register, 'already-account') }}
-                                        <a href="toPageLogin"
+                                        <a href="{{ route('login.client',$lang) }}"
                                             style="text-decoration:none;">{{ $sitedataCtrlr->gettrans($register, 'login') }}</a>
                                     </p>
                                 </div>

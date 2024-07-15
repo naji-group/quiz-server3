@@ -33,7 +33,7 @@
                         <div class="sec">
                                     <p>
                                         {{$sitedataCtrlr->gettrans($login,'forgot-password')}}
-                                        <a href="{{route('passwordclient.request')}}">{{$sitedataCtrlr->gettrans($login,'recovery-password')}}</a>
+                                        <a href="#">{{$sitedataCtrlr->gettrans($login,'recovery-password')}}</a>
                                     </p>
                                     <p>
                                         {{$sitedataCtrlr->gettrans($login,'no-account')}}
@@ -50,13 +50,6 @@
           </div>
 @endsection
 @section('js')
-<script>
-var input_required= "{{$sitedataCtrlr->gettrans($login,'required')}}";
-var input_email= "{{$sitedataCtrlr->gettrans($login,'input-email')}}";
-var auth_failed= "{{$sitedataCtrlr->gettrans($login,'auth-failed')}}";
-var fail_msg= "{{$sitedataCtrlr->gettrans($login,'fail-login')}}";
- 
-</script>
 <script src="{{ url('assets/site/js/sweetalert.min.js') }}"></script>
 <script src="{{ url('assets/site/js/validate.js') }}"></script>
 <script src="{{ url('assets/site/js/login.js') }}"></script>

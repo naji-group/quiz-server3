@@ -165,5 +165,7 @@
         var selcntry = "{{ $client->country }}";
          var urlval = "{{ url('balanceinfo') }}";
         var arrdata;
+        var input_required= "{{$sitedataCtrlr->gettrans($profile,'required')}}";
+        var input_email= "{{$sitedataCtrlr->gettrans($profile,'input-email')}}";
     </script>
 @endsection

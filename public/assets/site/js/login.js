@@ -8,7 +8,7 @@ $(document).ready(function() {
 
 		//	return true;
 		}
-		if (!validateinputemail($(this),"Must be email")) {
+		if (!validateinputemail($(this),emailmsg)) {
 			return false;
 		} else {
 			return true;
@@ -26,7 +26,7 @@ $(document).ready(function() {
    //register form 
    $('.btn-submit').on('click', function (e) {
 		e.preventDefault();
-if( validatempty($("#email")) && validateinputemail($("#email"),"Must be email") && validatempty($("#password"))  ){
+if( validatempty($("#email")) && validateinputemail($("#email"),emailmsg) && validatempty($("#password"))  ){
     var formid = $(this).closest("form").attr('id');
 		sendform('#' + formid);
 }
@@ -66,7 +66,13 @@ if( validatempty($("#email")) && validateinputemail($("#email"),"Must be email")
 				noteError();
 				$.each(response.errors, function (key, val) {
 				//	$("#" + "info-form-error").append('<li class="text-danger">' + val[0] + '</li>');
+				if(val[0]=='auth.failed'){
+					
+					$("#" + key + "-error").addClass('invalid-feedback').text(auth_failed).show();
+				}else{
 					$("#" + key + "-error").addClass('invalid-feedback').text(val[0]).show();
+				}
+				
 					$("#" + key).addClass('is-invalid');
 				});
 
@@ -83,5 +89,5 @@ if( validatempty($("#email")) && validateinputemail($("#email"),"Must be email")
   //  swal("تم   بنجاح");
   }
   function noteError() {
-    swal("لم يتم تسجيل الدخول");
+    swal(fail_msg);
   }

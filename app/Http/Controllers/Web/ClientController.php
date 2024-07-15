@@ -69,7 +69,7 @@ class ClientController extends Controller
     $transarr = $sitedctrlr->FillTransData($lang);
     $defultlang = $transarr['langs']->first();
 
-    $login = $sitedctrlr->getbycode($defultlang->id, ['login']);
+    $login = $sitedctrlr->getbycode($defultlang->id, ['login','register-error']);
 
     return view('site.client.login', [
       'transarr' => $transarr,
@@ -177,7 +177,7 @@ class ClientController extends Controller
       $defultlang = $transarr['langs']->first();
       // $profile = $sitedctrlr->getbycode($defultlang->id, ['profile', 'register']);
 
-      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile']);
+      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile','register-error']);
 
 
       return view(

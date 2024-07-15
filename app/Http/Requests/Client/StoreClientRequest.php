@@ -27,7 +27,7 @@ protected $alphaAtexpr='/^[\pL\s\_\-\@\.\0-9]+$/u';
      // $this->lang=$lang;
        return[
          
-           'name'=>'required|string|regex:'.$this->alphaAtexpr,               
+           'name'=>'required|string|between:1,100|regex:'.$this->alphaAtexpr,               
          'email'=>'required|email|unique:clients,email',      
          'password'=>'required|between:'. $this->minpass.','. $this->maxpass,
          'confirm_password' => 'same:password',         
@@ -49,13 +49,16 @@ public function messages(): array
    return[   
       'confirm_password.same' => $sitedctrlr->gettrans($translate,'input-same') ,          
      'name.required'=> $sitedctrlr->gettrans($translate,'required'), 
-     'name.regex'=>__('messages.must be alpha',[],'en') ,  
-     'name.unique'=>__('messages.The user_name is already exist',[],'ar'),  
+     'name.regex'=>$sitedctrlr->gettrans($translate,'no-symbols') ,  
+     'name.between'=>$sitedctrlr->gettrans($translate,'input-between') , 
+     //'name.unique'=>$sitedctrlr->gettrans($translate,'user-name-exist'),  
      'email.required'=>  $sitedctrlr->gettrans($translate,'required'),
      'email.email'=>$sitedctrlr->gettrans($translate,'input-email') ,
-   'email.unique'=>__('messages.email is already exist',[],'ar') ,  
+   'email.unique'=>$sitedctrlr->gettrans($translate,'email-exist')  ,  
      'password.between'=>$sitedctrlr->gettrans($translate,'password-between'),   
-     'password.required'=> $sitedctrlr->gettrans($translate,'required')
+     'password.required'=> $sitedctrlr->gettrans($translate,'required'),
+     'image.file'=> $sitedctrlr->gettrans($translate,'file-image'),
+     'image.image'=> $sitedctrlr->gettrans($translate,'file-image'),
     ];
     
 }

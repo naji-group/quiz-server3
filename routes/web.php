@@ -23,7 +23,9 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Web\CategoryQuesController;
 use App\Http\Controllers\Web\LevelController;
  use App\Http\Controllers\Web\TranslateController;
-
+ use App\Http\Controllers\Auth\PasswordResetLinkController;
+ use App\Http\Controllers\Auth\NewPasswordController;
+ use App\Http\Controllers\Web\PasswordController;
 //site
 use App\Http\Controllers\HomeController;
 //use Illuminate\Support\Facades\Facade\Artisan;
@@ -368,6 +370,21 @@ Route::middleware('auth')->group(function () {
 //question client
 
 //site
+ //password
+ Route::get('forgot-passwordclient', [PasswordController::class, 'forgotpass'])
+->name('passwordclient.request');
+ Route::middleware('guest:client')->group(function () {
+
+    Route::post('forgot-passwordclient', [PasswordResetLinkController::class, 'store'])
+    ->name('passwordclient.email');
+
+Route::get('reset-passwordclient/{token}', [NewPasswordController::class, 'create'])
+    ->name('passwordclient.reset');
+
+Route::post('reset-passwordclient', [NewPasswordController::class, 'store'])
+    ->name('passwordclient.store');
+});
+//
 Route::get('{lang}/categories', [HomeController::class, 'getcategories']);
 Route::prefix('{lang}')->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
@@ -379,6 +396,11 @@ Route::prefix('{lang}')->group(function () {
     
         Route::get('/login', [ClientController::class, 'showlogin'])->name('login.client');
         Route::post('/login', [ClientController::class, 'login']);
+
+        //password
+    
+      
+
     
        // 
 
@@ -406,3 +428,4 @@ Route::get('/myscore', [ClientController::class, 'myscore']);
 });
 });
 require __DIR__ . '/auth.php';
+ 
