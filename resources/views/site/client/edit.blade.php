@@ -5,7 +5,7 @@
             <main role="main" class="col-12 col-lg-10 px-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">تعديل بيانات الحساب</h1>
+                    <h1 class="h2">{{$sitedataCtrlr->gettrans($profile,'modify-account')}}</h1>
                 </div>
 
               
@@ -15,29 +15,29 @@
 
                         <div class="card login-card">
                             <div class="card-body  bg-style">
-                                <h3 class="card-title text-center">تغيير كلمة المرور </h3>
+                                <h3 class="card-title text-center">{{$sitedataCtrlr->gettrans($profile,'change-password')}}</h3>
                                 <form action ="{{ route('client.updatepass') }}" method="POST" name="pass-form"
                                     id="pass-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="old_password">كلمة المرور القديمة</label>
+                                        <label for="old_password">{{$sitedataCtrlr->gettrans($profile,'old-password')}}</label>
                                         <input type="password" class="form-control" name="old_password" id="old_password"
-                                            placeholder="ادخل كلمة المرور القديمة">
+                                            placeholder="{{$sitedataCtrlr->gettrans($profile,'old-password-placeholder')}}">
                                         <div id="old_password-error" class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="password">كلمة المرور الجديدة</label>
+                                        <label for="password">{{$sitedataCtrlr->gettrans($profile,'new-password')}}</label>
                                         <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="ادخل كلمة المرور الجديدة">
+                                            placeholder="{{$sitedataCtrlr->gettrans($profile,'new-password-placeholder')}}">
                                         <div id="password-error" class="invalid-feedback"></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="confirm_password">تأكيد كلمة المرور</label>
+                                        <label for="confirm_password">{{$sitedataCtrlr->gettrans($profile,'confirm-password')}}</label>
                                         <input type="password" class="form-control" name="confirm_password"
-                                            id="confirm_password" placeholder="ادخل كلمة المرور">
+                                            id="confirm_password" placeholder="{{$sitedataCtrlr->gettrans($profile,'confirm-password-placeholder')}}">
                                         <div id="confirm_password-error" class="invalid-feedback"></div>
                                     </div>
-                                    <button type="submit" id="btn-pass" class="btn btn-primary btn-block">تغيير</button>
+                                    <button type="submit" id="btn-pass" class="btn btn-primary btn-block">{{$sitedataCtrlr->gettrans($profile,'change-btn')}}</button>
                                 </form>
 
                             </div>
@@ -50,7 +50,7 @@
                     <div class="col-md-12">
                         <div class="card login-card">
                             <div class="card-body  bg-style">
-                                <h3 class="card-title text-center">تعديل المعلومات الشخصية</h3>
+                                <h3 class="card-title text-center">{{$sitedataCtrlr->gettrans($profile,'modify-personal')}}</h3>
                                 <form action ="{{ route('client.update') }}" method="POST" name="update-form"
                                     id="update-form" enctype="multipart/form-data">
                                     @csrf
@@ -63,7 +63,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="country">الدولة</label>
+                                        <label for="country">{{ $sitedataCtrlr->gettrans($profile, 'country') }}</label>
                                         <select style="width:100%;overflow-y: scroll; padding:5px;" class="form-control"
                                             id="country" name="country">
 
@@ -71,16 +71,16 @@
                                         <div id="country-error" class="invalid-feedback"> .</div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="gender">الجنس</label>
+                                        <label for="gender">{{ $sitedataCtrlr->gettrans($profile, 'gender') }}</label>
 
                                         <select style="width:100%;overflow-y: scroll; padding:5px;" class="form-control"
                                             id="gender" name="gender">
-                                            <option value="0">أختر</option>
+                                            <option value="0">{{ $sitedataCtrlr->gettrans($profile, 'choose') }}</option>
                                             <option value="male"
-                                                @if ($client->gender == 'male') @selected(true) @endif>ذكر
+                                                @if ($client->gender == 'male') @selected(true) @endif>{{ $sitedataCtrlr->gettrans($profile, 'male') }}
                                             </option>
                                             <option value="female"
-                                                @if ($client->gender == 'female') @selected(true) @endif>أنثى
+                                                @if ($client->gender == 'female') @selected(true) @endif>{{ $sitedataCtrlr->gettrans($profile, 'female') }}
                                             </option>
                                         </select>
 
@@ -90,10 +90,10 @@
                                         <label for="image">{{ $sitedataCtrlr->gettrans($profile, 'image') }}</label>
                                         <input type="file" class="form-control" name="image" id="image"
                                             placeholder="{{ $sitedataCtrlr->gettrans($profile, 'image-placeholder') }}">
-                                        <div id="name-image" class="invalid-feedback">يجب ان يكون الملف صورة</div>
+                                        <div id="name-image" class="invalid-feedback">{{ $sitedataCtrlr->gettrans($profile, 'image-message') }}</div>
                                     </div>
 
-                                    <button type="submit" id="btn-update" class="btn btn-primary btn-block">تعديل</button>
+                                    <button type="submit" id="btn-update" class="btn btn-primary btn-block">{{ $sitedataCtrlr->gettrans($profile, 'update-btn') }}</button>
                                 </form>
 
                             </div>
@@ -106,21 +106,21 @@
                     <div class="col-md-12">
                         <div class="card login-card">
                             <div class="card-body  bg-style ">
-                                <h3 class="card-title text-center">سحب رصيد</h3>
+                                <h3 class="card-title text-center">{{ $sitedataCtrlr->gettrans($profile, 'balance') }}</h3>
                                 <form action ="{{ url('pull') }}" method="POST" name="pull-form" style="display: none;"
                                     id="pull-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="points">النقاط</label>
+                                        <label for="points">{{ $sitedataCtrlr->gettrans($profile, 'points') }}</label>
                                         <input type="text" class="form-control" id="points" name="points" value=""
-                                            placeholder="ادخل عدد النقاط المطلوب سحبها">
+                                            placeholder="{{ $sitedataCtrlr->gettrans($profile, 'points-number') }}">
                                         <div id="points-error" class="invalid-feedback"> .</div>
-                                        <div id="pointbalance"><span>رصيدك:</span><span id="pointbalance-value" ></span><span></span></div>
-                                        <div id="coin"  ><span>القيمة:</span><span id="coin-value" ></span><span></span></div>
+                                        <div id="pointbalance"><span>{{ $sitedataCtrlr->gettrans($profile, 'your-balance') }}</span><span id="pointbalance-value" ></span><span></span></div>
+                                        <div id="coin"  ><span>{{ $sitedataCtrlr->gettrans($profile, 'value') }}</span><span id="coin-value" ></span><span></span></div>
                                     </div> 
-                                    <button type="submit" id="btn-pull" class="btn btn-primary btn-block">سحب</button>
+                                    <button type="submit" id="btn-pull" class="btn btn-primary btn-block">{{ $sitedataCtrlr->gettrans($profile, 'pull') }}</button>
                                 </form>
-<p id="balance-msg" class="text-center" style="display: none;"> الرصيد غير كافي</p>
+<p id="balance-msg" class="text-center" style="display: none;">{{ $sitedataCtrlr->gettrans($profile, 'not-enough') }}</p>
                             </div>
                         </div>
                     </div>
@@ -131,15 +131,15 @@
     <div class="col-md-12">
         <div class="card login-card">
             <div class="card-body  bg-style">
-                <h3 class="card-title text-center">حذف الحساب</h3>
+                <h3 class="card-title text-center">{{ $sitedataCtrlr->gettrans($profile, 'delete-account') }}</h3>
                 <form action ="{{ url('u/delete') }}" method="POST" name="del-form" id="del-form"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="txt-sec ">
-                        <span style="color:Red;">ستفقد جميع أنواع المحتوى والبيانات الواردة والنقاط في هذا الحساب</span>
+                        <span style="color:Red;">{{ $sitedataCtrlr->gettrans($profile, 'warning') }}</span>
                     </div>
                     <button type="submit" id="btn-delete"
-                        class="btn btn-primary btn-block btn-delete">حذف</button>
+                        class="btn btn-primary btn-block btn-delete">{{ $sitedataCtrlr->gettrans($profile, 'delete-btn') }}</button>
                 </form>
 
             </div>

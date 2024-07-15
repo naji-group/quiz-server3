@@ -175,7 +175,11 @@ class ClientController extends Controller
       $transarr = $sitedctrlr->FillTransData($lang);
 
       $defultlang = $transarr['langs']->first();
-      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile', 'register']);
+      // $profile = $sitedctrlr->getbycode($defultlang->id, ['profile', 'register']);
+
+      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile']);
+
+
       return view(
         "site.client.edit",
         [
