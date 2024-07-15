@@ -21,6 +21,7 @@ class PasswordResetLinkController extends Controller
             'status' => session('status'),
         ]);
     }
+  
 
     /**
      * Handle an incoming password reset link request.
