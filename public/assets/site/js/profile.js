@@ -1,5 +1,5 @@
 var valid=true;
-var delmsg='تم حذف الحساب بنجاح!'
+
 $(document).ready(function() {
   
   $("#name").focusout(function (e) {
@@ -13,19 +13,19 @@ $(document).ready(function() {
 	});
  
   
-  $("#email").focusout(function (e) {
-    if (!validatempty($(this))) {
-			return false;
-		} else {
+//   $("#email").focusout(function (e) {
+//     if (!validatempty($(this))) {
+// 			return false;
+// 		} else {
 
-		//	return true;
-		}
-		if (!validateinputemail($(this),"Must be email")) {
-			return false;
-		} else {
-			return true;
-		}
-	}); 
+// 		//	return true;
+// 		}
+// 		if (!validateinputemail($(this),"Must be email")) {
+// 			return false;
+// 		} else {
+// 			return true;
+// 		}
+// 	}); 
   $("#password").focusout(function (e) {
 		if (!validatempty($(this))) {
 			return false;
@@ -66,14 +66,7 @@ var formid = $(this).closest("form").attr('id');
  
 	
 });
-//    $('.btn-submit').on('click', function (e) {
-// 		e.preventDefault();
-// if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($("#email"),"Must be email") && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
-//     var formid = $(this).closest("form").attr('id');
-// 		sendform('#' + formid);
-// }
-		
-// 	});
+ 
 	$('#btn-pass').on('click', function (e) {
 		e.preventDefault();
 if(validatempty($("#old_password"))  && validatempty($("#password")) && validatempty($("#confirm_password"))  ){
@@ -101,9 +94,9 @@ if(validatempty($("#name")) && selValidatempty($("#country")) && selValidatempty
 		ClearErrors();
 		var form = $(formid)[0];
 		var formData = new FormData(form);
-		urlval = $(formid).attr("action");
+	var	urlformval = $(formid).attr("action");
 		$.ajax({
-			url: urlval,
+			url: urlformval,
 			type: "POST",
 			data: formData,
 			contentType: false,
@@ -148,7 +141,13 @@ if(validatempty($("#name")) && selValidatempty($("#country")) && selValidatempty
 			return false;
 		} else {
 			if( allnumeric($(this).val())){
-				var cash=$(this).val()/arrdata.pointsrate;
+				var pullpoints=$(this).val();
+				var cash="-";
+if(pullpoints>=arrdata.minpoints && pullpoints<=arrdata.balance){
+	  cash=$(this).val()/arrdata.pointsrate;
+}
+				
+
 				$('#coin-value').text(cash);
 			}
 			
@@ -169,9 +168,9 @@ if(validatempty($("#points"))){
 	ClearErrors();
 	var form = $(formid)[0];
 	var formData = new FormData(form);
-	urlval = $(formid).attr("action");
+	var urlpull = $(formid).attr("action");
 	$.ajax({
-		url: urlval,
+		url: urlpull,
 		type: "POST",
 		data: formData,
 		contentType: false,
@@ -245,13 +244,13 @@ $('#u-balance').text(arrdata.balance);
 loadpointdata() ;
   });
   function noteSuccess() {
-    swal ("تمت العملية بنجاح");
+    swal (success_msg);
   }
   function notemsg(msg) {
     swal(msg);
   }
   function noteError() {
-    swal("لم تنجح العملية");
+    swal(fail_msg);
   }
   function resetForm() {
 	jQuery('#pull-form')[0].reset();

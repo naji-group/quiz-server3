@@ -412,14 +412,17 @@ Route::  middleware(['auth:client', 'verified'])->group(function () {
     Route::post('u/logout', [ClientController::class, 'logout'])->name('logout.client');
   //account
     Route::post('u/delete', [ClientController::class, 'destroy']) ;
-    Route::post('/updatepass', [ClientController::class, 'updatepass'])->name('client.updatepass');
-    Route::post('/update', [ClientController::class, 'update'])->name('client.update');
-    Route::post('/pull', [ClientController::class, 'pull']);
+
+ 
+    
     Route::get('/balanceinfo', [ClientController::class, 'balanceinfo']);
 
     Route::prefix('{lang}')->group(function () {
         //account
+        Route::post('/updatepass', [ClientController::class, 'updatepass'])->name('client.updatepass');
     Route::get('/account', [ClientController::class, 'edit'])->name('client.account');
+    Route::post('/update', [ClientController::class, 'update'])->name('client.update');
+    Route::post('/pull', [ClientController::class, 'pull']);
 //my score
 Route::get('/myscore', [ClientController::class, 'myscore']);
    Route::get('/quiz/{slug}', [HomeController::class, 'getcategory']);

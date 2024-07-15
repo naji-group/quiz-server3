@@ -329,8 +329,9 @@ class ClientController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateClientRequest $request)
+  public function update(UpdateClientRequest $request,$lang)
   {
+    StoreClientRequest::$lang=$lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -366,8 +367,9 @@ class ClientController extends Controller
       return response()->json("ok");
     }
   }
-  public function updatepass(UpdatePassRequest $request)
+  public function updatepass(UpdatePassRequest $request,$lang)
   {
+    StoreClientRequest::$lang=$lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -390,8 +392,9 @@ class ClientController extends Controller
     }
   }
   //pull balance
-  public function pull(PullRequest $request)
+  public function pull(PullRequest $request,$lang)
   {
+    StoreClientRequest::$lang=$lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);

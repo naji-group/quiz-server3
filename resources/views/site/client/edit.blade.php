@@ -16,7 +16,7 @@
                         <div class="card login-card">
                             <div class="card-body  bg-style">
                                 <h3 class="card-title text-center">{{$sitedataCtrlr->gettrans($profile,'change-password')}}</h3>
-                                <form action ="{{ route('client.updatepass') }}" method="POST" name="pass-form"
+                                <form action ="{{ route('client.updatepass',$lang) }}" method="POST" name="pass-form"
                                     id="pass-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -51,7 +51,7 @@
                         <div class="card login-card">
                             <div class="card-body  bg-style">
                                 <h3 class="card-title text-center">{{$sitedataCtrlr->gettrans($profile,'modify-personal')}}</h3>
-                                <form action ="{{ route('client.update') }}" method="POST" name="update-form"
+                                <form action ="{{ route('client.update',$lang) }}" method="POST" name="update-form"
                                     id="update-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -107,7 +107,7 @@
                         <div class="card login-card">
                             <div class="card-body  bg-style ">
                                 <h3 class="card-title text-center">{{ $sitedataCtrlr->gettrans($profile, 'balance') }}</h3>
-                                <form action ="{{ url('pull') }}" method="POST" name="pull-form" style="display: none;"
+                                <form action ="{{ url($lang,'pull') }}" method="POST" name="pull-form" style="display: none;"
                                     id="pull-form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group">
@@ -155,17 +155,23 @@
     </div>
 @endsection
 @section('js')
+<script>
+    var countryurl = "{{ URL::asset('assets/site/js/countries/' . $lang . '/countries.json') }}";
+    var selcntry = "{{ $client->country }}";
+     var urlval = "{{ url('balanceinfo') }}";
+    var arrdata;
+    var input_required= "{{$sitedataCtrlr->gettrans($profile,'required')}}";
+    var input_email= "{{$sitedataCtrlr->gettrans($profile,'input-email')}}";
+    var success_msg= "{{$sitedataCtrlr->gettrans($profile,'success-process')}}";
+    var fail_msg= "{{$sitedataCtrlr->gettrans($profile,'fail-process')}}";
+    var delmsg="{{$sitedataCtrlr->gettrans($profile,'account-deleted')}}";
+    var choose_country="{{$sitedataCtrlr->gettrans($profile,'choose-country')}}";
+     
+</script>
     <script src="{{ URL::asset('assets/site/js/country.js') }}"></script>
 
     <script src="{{ url('assets/site/js/sweetalert.min.js') }}"></script>
     <script src="{{ url('assets/site/js/validate.js') }}"></script>
     <script src="{{ url('assets/site/js/profile.js') }}"></script>
-    <script>
-        var countryurl = "{{ URL::asset('assets/site/js/countries/' . $lang . '/countries.json') }}";
-        var selcntry = "{{ $client->country }}";
-         var urlval = "{{ url('balanceinfo') }}";
-        var arrdata;
-        var input_required= "{{$sitedataCtrlr->gettrans($profile,'required')}}";
-        var input_email= "{{$sitedataCtrlr->gettrans($profile,'input-email')}}";
-    </script>
+
 @endsection

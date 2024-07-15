@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
  
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Web\SettingController;
-
+use App\Http\Controllers\Web\SiteDataController;
 class PullRequest extends FormRequest
 {
-
+  public static $lang="";
     /**
      * Determine if the Clientis authorized to make this request.
      */
@@ -18,7 +18,7 @@ class PullRequest extends FormRequest
     {
         return true;
     }
- 
+  
     public function rules(): array
     {  
       $setctrl=new SettingController();
@@ -36,12 +36,18 @@ class PullRequest extends FormRequest
  */
 public function messages(): array
 {
-  
+  $sitedctrlr = new SiteDataController();
+  $transarr = $sitedctrlr->FillTransData( $this->lang);
+   $defultlang = $transarr['langs']->first();
+  $translate= $sitedctrlr->getbycode($defultlang->id, ['pull','register-error']); 
    return[   
-    'points.required'=> __('messages.this field is required',[],'ar') ,   
-   
+    'points.required'=> $sitedctrlr->gettrans($translate,'required'), 
+    'points.integer'=> $sitedctrlr->gettrans($translate,'only-number'), 
+    'points.gt'=> $sitedctrlr->gettrans($translate,'points-greater'), 
+    'points.lte'=> $sitedctrlr->gettrans($translate,'points-lessequal'), 
+    'points.gte'=> $sitedctrlr->gettrans($translate,'points-greaterqual'), 
     ];
-    
+    //'only numbers'=>'هذا الحقل يجب ان يحوي ارقام فقط',
 }
 
 }

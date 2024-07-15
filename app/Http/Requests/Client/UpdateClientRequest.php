@@ -4,6 +4,7 @@ namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Web\SiteDataController;
 class UpdateClientRequest extends FormRequest
 {
     /**
@@ -13,22 +14,16 @@ class UpdateClientRequest extends FormRequest
     {
         return true;
     }
-    protected $errorBag = "infoform";
-protected   $minpass=8;
-protected   $maxpass=16;
-protected  $minMobileLength=10;
-protected $maxMobileLength=15;
-protected $maxlength=500;
-protected $alphaexpr='/^[\pL\s\_\-\0-9]+$/u';
+    public static $lang="";
+ 
 protected $alphaAtexpr='/^[\pL\s\_\-\@\.\0-9]+$/u';
     public function rules(): array
     {
        
       
-       return[
-   
-           'name'=>'required|string|unique:clients,name,'.Auth::guard('client')->user()->id.'|regex:'.$this->alphaAtexpr,   
-        // 'name'=>'required|alpha_num:ascii|unique:users,name',        
+       return[   
+         //  'name'=>'required|string|between:1,100|unique:clients,name,'.Auth::guard('client')->user()->id.'|regex:'.$this->alphaAtexpr,   
+             'name'=>'required|string|between:1,100|regex:'.$this->alphaAtexpr,               
          //'birthdate'=>'required|date',   
          'gender'=>'required|in:male,female',    
          'country'=>'required|not_in:0',   
@@ -43,11 +38,22 @@ protected $alphaAtexpr='/^[\pL\s\_\-\@\.\0-9]+$/u';
  */
 public function messages(): array
 {  
+
+    $sitedctrlr = new SiteDataController();
+    $transarr = $sitedctrlr->FillTransData( $this->lang);
+     $defultlang = $transarr['langs']->first();
+    $translate= $sitedctrlr->getbycode($defultlang->id, ['register','register-error']);  
+
    return[        
-     'name.required'=> __('messages.this field is required',[],'ar') ,  
+     'name.required'=>$sitedctrlr->gettrans($translate,'required') ,  
+     'name.between'=>$sitedctrlr->gettrans($translate,'input-between') ,
+     'name.regex'=>$sitedctrlr->gettrans($translate,'no-symbols') , 
+
      'name.unique'=>__('messages.The user_name is already exist',[],'ar'),   
-     'name.regex'=>__('messages.must be alpha',[],'en') ,
-  
+     'gender'=>$sitedctrlr->gettrans($translate,'required') , 
+     'country'=>$sitedctrlr->gettrans($translate,'required') , 
+     'image.file'=> $sitedctrlr->gettrans($translate,'file-image'),
+     'image.image'=> $sitedctrlr->gettrans($translate,'file-image'),
     ];
     
 }

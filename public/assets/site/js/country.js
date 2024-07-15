@@ -9,7 +9,7 @@ fillCountry();
 	function fillCountry() {
 		$.getJSON(countryurl, function(data){
 			//	console.log(data.countries);  
-			$("#country").html('<option title="" value="0"   class="text-muted">اختر الدولة</option>');
+			$("#country").html('<option title="" value="0"   class="text-muted">'+choose_country+'</option>');
 				$.each(data, function( key,value) {
 	  
 	 if(selcntry==value.alpha2){
