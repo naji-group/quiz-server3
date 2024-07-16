@@ -12,10 +12,16 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Http\Controllers\Web\StorageController;
+use App\Notifications\ClientResetPasswordNotification;
 //use App\Http\Controllers\Web\StorageController;
 class Client extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ClientResetPasswordNotification($token));
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -26,6 +26,7 @@ use App\Http\Controllers\Web\LevelController;
  use App\Http\Controllers\Auth\PasswordResetLinkController;
  use App\Http\Controllers\Auth\NewPasswordController;
  use App\Http\Controllers\Web\PasswordController;
+ use App\Http\Controllers\Web\ClientPasswordResetController;
 //site
 use App\Http\Controllers\HomeController;
 //use Illuminate\Support\Facades\Facade\Artisan;
@@ -213,26 +214,20 @@ Route::prefix('translate')->group(function () {
  
 }); 
 });
- Route::get('{lang}/page/{slug}', [HomeController::class, 'showpage']);
  
-//question client
+  
 
-//site
- //password
- Route::get('forgot-passwordclient', [PasswordController::class, 'forgotpass'])
-->name('passwordclient.request');
- Route::middleware('guest:client')->group(function () {
+ 
+//site 
+//password
 
-    Route::post('forgot-passwordclient', [PasswordResetLinkController::class, 'store'])
-    ->name('passwordclient.email');
+Route::get('u/password/reset', [ClientPasswordResetController::class, 'showLinkRequestForm'])->name('client.password.request');
+Route::post('u/password/email', [ClientPasswordResetController::class, 'sendResetLinkEmail'])->name('client.password.email');
+Route::get('u/password/reset/{token}', [ClientPasswordResetController::class, 'showResetForm'])->name('client.password.reset');
+Route::post('u/password/reset', [ClientPasswordResetController::class, 'reset'])->name('client.password.update');
 
-Route::get('reset-passwordclient/{token}', [NewPasswordController::class, 'create'])
-    ->name('passwordclient.reset');
-
-Route::post('reset-passwordclient', [NewPasswordController::class, 'store'])
-    ->name('passwordclient.store');
-});
 //
+Route::get('{lang}/page/{slug}', [HomeController::class, 'showpage']);
 Route::get('{lang}/categories', [HomeController::class, 'getcategories']);
 Route::prefix('{lang}')->group(function () {
     Route::get('/home', [HomeController::class, 'index']);

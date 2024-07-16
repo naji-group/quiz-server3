@@ -40,22 +40,22 @@
                               {{$sitedataCtrlr->gettrans($login,'forgot-password')}}
                            
                           </p>
-                          <p>{{ session('status') }} {{ Session::get('status')}}</p>
+                          <p>{{ session('status') }}</p>
                           </div>
-                        <form   action ="{{ route('passwordclient.email') }}" method="POST"  name="login-form"   id="login-form"
+                        <form   action ="{{ route('client.password.email') }}" method="POST"  name="login-form"   id="login-form"
                         enctype="multipart/form-data">
                         @csrf
                           <div class="form-group">
                             <label for="email">{{$sitedataCtrlr->gettrans($login,'email')}}</label>
                             <input type="text" class="form-control" id="email"  name="email"  placeholder="{{$sitedataCtrlr->gettrans($login,'email-placeholder')}}">
-                            <div  id="email-error" class="invalid-feedback">@if (isset($errors))
-                             dd
-                            @endif</div>
+                            <div  id="email-error" class="invalid-feedback"> </div>
                           </div>
                         
                           <button type="submit" class="btn btn-primary btn-block  ">ارسال</button>
                         </form>
- 
+                        <p>                          
+                          <a href="{{ route('site.home') }}">عودة للصفحة الرئيسية</a>                                   
+                      </p>
                       </div>
                     </div>
                   </div>

@@ -33,7 +33,7 @@
                         <div class="sec">
                                     <p>
                                         {{$sitedataCtrlr->gettrans($login,'forgot-password')}}
-                                        <a href="{{route('passwordclient.request')}}">{{$sitedataCtrlr->gettrans($login,'recovery-password')}}</a>
+                                        <a href="{{route('client.password.request')}}">{{$sitedataCtrlr->gettrans($login,'recovery-password')}}</a>
                                     </p>
                                     <p>
                                         {{$sitedataCtrlr->gettrans($login,'no-account')}}
