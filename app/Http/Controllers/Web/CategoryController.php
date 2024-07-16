@@ -60,16 +60,15 @@ class CategoryController extends Controller
         } else {
 
             $tmpslug = "";
-            // if ($formdata["slug"] == "" || empty($formdata["slug"])) {
-            $tmpslug = $formdata["title"];
-            // } else {
-            //     $tmpslug = $formdata["slug"];
-            // }
-            $promodel = Category::where('slug', $tmpslug)->first();
+           
+            
+                $tmpslug = Str::slug($formdata["title"]); 
+                 
+            $promodel = Category::where('slug', $tmpslug)->where('code','page')->first();
             if (!is_null($promodel)) {
                 // error
                 return response()->json([
-                    "errors" => ["slug" => [__('messages.this field exist', [], 'ar')]]
+                    "errors" => ["title" => [__('messages.this field exist', [], 'ar')]]
                 ], 422);
 
             } else {
@@ -106,8 +105,14 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $item = Category::find($id);
-
-        return view("admin.page.edit", ["page" => $item,]);
+        $lang_list = Language::orderByDesc('is_default')->with(
+            [
+                'langposts' => function ($q) use ($id) {
+                    $q->where('category_id', $id);
+                }
+            ]
+        )->get();
+        return view("admin.page.edit", ["category" => $item,'lang_list'=>$lang_list]);
     }
 
     /**
@@ -130,11 +135,11 @@ class CategoryController extends Controller
             //run first time only
             $tmpslug = "";
             if ($formdata["slug"] == "" || empty($formdata["slug"])) {
-                $tmpslug = $formdata["title"];
-            } else {
-                $tmpslug = $formdata["slug"];
-            }
-            $promodel = Category::where('slug', $tmpslug)->whereNot('id', $id)->first();
+                $tmpslug = Str::slug($formdata["title"]); 
+                } else {
+                    $tmpslug = Str::slug($formdata["slug"]) ;
+                }
+            $promodel = Category::where('slug', $tmpslug)->where('code','page')->whereNot('id', $id)->first();
             if (!is_null($promodel)) {
                 // error
                 return response()->json([
@@ -145,7 +150,7 @@ class CategoryController extends Controller
                 Category::find($id)->update([
                     //'user_name'=>$formdata['user_name'],
                     'title' => $formdata['title'],
-                    'desc' => $formdata['desc'],
+                   // 'desc' => $formdata['desc'],
                     // 'meta_key' =>isset ($formdata['metakey']) ? $formdata['metakey'] : '',  
                     'slug' => Str::slug($tmpslug),
                     'status' => isset($formdata["status"]) ? 1 : 0,

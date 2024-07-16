@@ -52,6 +52,9 @@ body {
   background: rgba(255, 255, 255, 0.5);
   color: black;
 }
+#languageDropdown{
+   display: flex;align-items: center; 
+}
 
 /* تعديلات للقائمة السفلية */
 .fixed-bottom {
