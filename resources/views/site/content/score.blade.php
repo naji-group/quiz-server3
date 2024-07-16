@@ -12,68 +12,79 @@
                 <div class="row main-content justify-content-center ">
                     <div class="col-md-12">
                         <div class="card login-card">
-                             
-
-<!-- category  -->
-
-@forelse ($category_score as $cat)
-<div class="card-body  bg-style">
-    <h3 class="card-title text-center">{{ $cat['category']['tr_title'] }}</h3>
-   <!-- محتوى الصفحة -->
-   <div class="card-container">
-    
-    <div class="scard text-center animate__animated ">
-        <h2>{{ $sitedataCtrlr->gettrans($translate, 'high-score') }}</h2>
-        <p> {{ $cat['total_score']['client_name'] }}</p>
-        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> : <span>{{ $cat['total_score']['level'] }}</span> </p>
-        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $cat['total_score']['cat_score'] }}</span> </p>
-    </div>
-    <div class="scard text-center animate__animated">
-        <h2>{{ $sitedataCtrlr->gettrans($translate, 'month-score') }}</h2>
-        <p> {{ $cat['month_score']['client_name'] }}</p>
-        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> : <span>{{ $cat['month_score']['level'] }}</span> </p>
-        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $cat['month_score']['cat_score'] }}</span> </p>
-    </div>
-   
-</div>
 
 
-</div>
+                            <!-- category  -->
 
-<div class="card-separator" >
-    <hr>
-</div>
-
-@empty
-<p>{{ $sitedataCtrlr->gettrans($translate, 'no-sections') }}</p>
-@endforelse
-                         
+                            @forelse ($category_score as $cat)
                                 <div class="card-body  bg-style">
-                                    <h3 class="card-title text-center">{{ $sitedataCtrlr->gettrans($translate, 'first-place') }}</h3>
-                                   <!-- محتوى الصفحة -->
-                                   <div class="card-container">
-                                    
-                                    <div class="scard  scard-one text-center animate__animated">
-                                        <h2> {{ $first_client->name }}</h2>
-                                    
-                                        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> : <span>{{ $first_client->total_balance }}</span> </p>
+                                    <h3 class="card-title text-center">{{ $cat['category']['tr_title'] }}</h3>
+                                    <!-- محتوى الصفحة -->
+                                    <div class="card-container">
+
+                                        <div class="scard text-center animate__animated ">
+                                            <h2>{{ $sitedataCtrlr->gettrans($translate, 'high-score') }}</h2>
+                                            <p> {{ $cat['total_score']['client_name'] }}</p>
+                                            <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> :
+                                                <span>{{ $cat['total_score']['level'] }}</span> </p>
+                                            <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> :
+                                                <span>{{ $cat['total_score']['cat_score'] }}</span> </p>
+                                        </div>
+                                        <div class="scard text-center animate__animated">
+                                            <h2>{{ $sitedataCtrlr->gettrans($translate, 'month-score') }}</h2>
+                                            <p> {{ $cat['month_score']['client_name'] }}</p>
+                                            <p><span>{{ $sitedataCtrlr->gettrans($translate, 'level') }}</span> :
+                                                <span>{{ $cat['month_score']['level'] }}</span> </p>
+                                            <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> :
+                                                <span>{{ $cat['month_score']['cat_score'] }}</span> </p>
+                                        </div>
+
                                     </div>
-                                   
-                                   
+
+
                                 </div>
-    
-    
+
+                                <div class="card-separator">
+                                    <hr>
                                 </div>
+
+                            @empty
+                                <p>{{ $sitedataCtrlr->gettrans($translate, 'no-sections') }}</p>
+                            @endforelse
+
+                            <div class="card-body  bg-style">
+                                <h3 class="card-title text-center">
+                                    {{ $sitedataCtrlr->gettrans($translate, 'general-sort') }}</h3>
+                                <!-- محتوى الصفحة -->
+                                @php
+                                    $i=1;
+                                @endphp
+                                @forelse ($first_client as $client)
+                                <div class="card-container">
+                                    <div class="scard  scard-one text-center animate__animated">
+                                        <h2>{{ $sitedataCtrlr->gettrans($translate, $i) }}</h2>
+                                        <h2> {{ $client->name }}</h2>
+                                        <p><span>{{ $sitedataCtrlr->gettrans($translate, 'total-points') }}</span> :
+                                            <span>{{ $client->total_balance }}</span> </p>
+                                    </div>
+                                </div>
+                                @php
+                                $i++;
+                            @endphp
+                                @empty
+                                <p>{{ $sitedataCtrlr->gettrans($translate, 'no-sections') }}</p>
+                            @endforelse
+
+                            </div>
 
                         </div>
                     </div>
-                  </div>
-                                 
-                </main>
+                </div>
+
+            </main>
         </div>
     </div>
 @endsection
 @section('js')
-    
     <script src="{{ url('assets/site/js/myscore.js') }}"></script>
 @endsection

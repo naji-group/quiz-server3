@@ -306,9 +306,9 @@ class ClientController extends Controller
     // return  $catarr;
 
     //high balance client
-    $firstclient = Client::orderByDesc('total_balance')->select('id', 'name', 'image', 'total_balance')->first();
+    $firstclient = Client::orderByDesc('total_balance')->select('id', 'name', 'image', 'total_balance')->take(3)->get();
     // return dd($catarr);
-    $translate = $sitedctrlr->getbycode($defultlang->id, ['footer-menu','public-score','home_page']);//chang
+    $translate = $sitedctrlr->getbycode($defultlang->id, ['footer-menu','public-score','home_page','sort-places']);//chang
     return view(
       "site.content.score",
       [
