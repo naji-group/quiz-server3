@@ -187,16 +187,24 @@ else{
     }
 
 
-    public function showpage(string $slug)
+    public function showpage($lang, $slug)
     {
-       $catmodel= Category::where('slug',$slug)->where('code','page')->where('status',1)->first();
-       if($catmodel){
-         return view("site.page.show",['page'=>$catmodel]);
+ 
+
+      $sitedctrlr=new SiteDataController();  
+            // $langitem = Language::where('status',1)->where('code', $lang)->first();
+       $transarr=$sitedctrlr->FillTransData($lang);
+       $defultlang=$transarr['langs']->first();    
+       $cat= $sitedctrlr->getcategory($slug,$defultlang->id);
+       
+       if($cat && $cat['code']=='page' && $cat['id']>0){
+         return view('site.page.show',['page'=>$cat,'transarr'=>$transarr,'lang'=>$lang,'defultlang'=>$defultlang 
+         ,'sitedataCtrlr'=>$sitedctrlr]); 
        }else{
          abort(404, '');
        }
- 
-    }
+            //  $catmodel= Category::where('slug',$slug)->where('code','page')->where('status',1)->first();
+         }
 
 
     public function getpostcontent( $lang,$slug,$postslug)

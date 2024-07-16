@@ -55,10 +55,10 @@
                                             <label  class="policy-form">
                                                 <span class="policy">
                                                     {{ $sitedataCtrlr->gettrans($register, 'policy') }}
-                                                    <a href="#"
+                                                    <a href="{{ url($lang.'/page','privacy') }}"
                                                         style="text-decoration:none;">{{ $sitedataCtrlr->gettrans($register, 'policy-privacy') }}</a>
                                                     &
-                                                    <a href="#"
+                                                    <a href="{{ url($lang.'/page','terms') }}"
                                                         style="text-decoration:none;">{{ $sitedataCtrlr->gettrans($register, 'policy-conditions') }}</a>
                                                 </span>
                                             </label>

@@ -18,10 +18,7 @@ class StoreCategoryRequest extends FormRequest
     {
   
        return[
-       'title'=>'required|string',   
- 
-          
-        
+       'title'=>'required|string',    
   
        ];   
     

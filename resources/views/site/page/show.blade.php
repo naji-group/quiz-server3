@@ -1,22 +1,54 @@
 @extends('site.layouts.layout')
-@section('page-title') - {{$page->title}} @endsection
+
 @section('content')
-    <div class="content-all" style="width: 100%; height:auto;">
-        <div class="part-country">
-            <div class="container">
-                <div class="container mt-5 mb-5">
-                    <div class="jumbotron">
-                        <h2>{{ Str::of($page->title)->toHtmlString()}}</h2>
-                        <hr>
-                    {{ Str::of($page->desc)->toHtmlString()}}  
-                </div>
-            </div>
-            </div>
-        </div>
+     <!-- المحتوى الرئيسي -->
+     <div class="container-fluid content">
+      <div class="row justify-content-center">
+        <main role="main" class="col-12 col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h2 class="h2"> <span>{{ $page['tr_title'] }}</span></h2>   
+          </div>
+          <!-- محتوى الصفحة -->
+          <div class="row main-content">
+            <!-- تصنيفات -->
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4 p-1">
+              {{-- <a href="#" class="category-link">
+                <div class="category-card category-card-full">
+                  <img src="{{ $catquis['image_path'] }}" alt="{{ $catquis['image_alt'] }}">
+                  <div class="category-overlay">
+                    <h6>{{ $catquis['tr_title'] }}</h6>
+                  </div>          
+                </div>         
+              </a> --}}
+         <div class="category-details">
+                    <p>{{Str::of($page['tr_content'])->toHtmlString()}}</p>
+                  </div>
+            </div>      
+          
+      
+          </div>
+        </main>
+      </div>
     </div>
-@endsection
-@section('css')
-    <link rel="stylesheet" href="{{ url('assets/site/assets/css/custom.css') }}" />
+    <form   action ="{{ url($lang,'checkans') }}" method="POST"  name="check-form"   id="check-form">
+      @csrf
+       
+    </form>
 @endsection
 @section('js')
+ 
+ 
+ 
+<script  >
+ 
+
+ 
+
+
+$(document).ready(function() {
+  
+   
+});
+</script>
 @endsection

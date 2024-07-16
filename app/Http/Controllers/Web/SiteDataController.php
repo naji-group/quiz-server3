@@ -1068,21 +1068,32 @@ class SiteDataController extends Controller
         $image_path = '';
         $image_alt = "";
         $meta_key="";
+        $code="";
+        $id=0;
       //  $is_link = 0;
+      if($category){
+       $id= $category->id;
         if ($category->langposts->first()) {
             $slug= $category->slug;
             $tr_title = $category->langposts->first()->title_trans;
             $tr_content = $category->langposts->first()->content_trans;
-            $image_path = $category->mediaposts->first()->mediastore->image_path;
-            $image_alt = $category->mediaposts->first()->mediastore->name . $category->mediaposts->first()->mediastore->caption;
-            $urlpath = url($lang_code, ['quiz', $category->slug]);
+            if($category->mediaposts->first()){
+                $image_path = $category->mediaposts->first()->mediastore->image_path;
+                $image_alt = $category->mediaposts->first()->mediastore->name . $category->mediaposts->first()->mediastore->caption;
+              
+            }
+
+             $urlpath = url($lang_code, ['quiz', $category->slug]);
             $meta_key= $category->meta_key;
+            $code= $category->code;
         }
+      }
+    
         return [
-            'id' => $category->id,
+            'id' =>$id,
             'slug' =>  $slug,
             'meta_key' =>  $meta_key,
-         //   'code' => $category->code,
+         'code' => $code,
             'tr_title' => $tr_title,
             'tr_content' => $tr_content,
             'urlpath' => $urlpath,

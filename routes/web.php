@@ -213,7 +213,7 @@ Route::prefix('translate')->group(function () {
  
 }); 
 });
- Route::get('/page/{slug}', [HomeController::class, 'showpage']);
+ Route::get('{lang}/page/{slug}', [HomeController::class, 'showpage']);
  
 //question client
 
