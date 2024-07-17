@@ -41,9 +41,49 @@ class ClientController extends Controller
    */
   public function index()
   {
-    //
+    $clients = Client::paginate(100);
+    return view('admin.client.all', [
+      'clients' => $clients,
+    ]);
   }
+  public function pullops($id)
+  {
+    $client=Client::find($id);
+    $op_list = PointTrans::with('client')->where('client_id',$id)->orderByDesc('created_at')->paginate(100);
+    return view('admin.client.pull', [
+      'op_list' => $op_list,
+      'client' => $client,
+    ]);
+  }
+  public function allpullops()
+  {
+    $op_list = PointTrans::with('client')->orderByDesc('created_at')->paginate(100);
+    return view('admin.client.pullall', [
+      'op_list' => $op_list,
+    ]);
+  }
+  /**
+   * Display the specified resource.
+   */
+  public function show($id)
+  {
+    $lang='ar';
+    $client = Client::find($id);
+   $cntryjson=  'assets/site/js/countries/' . $lang . '/countries.json' ;
+   $countries = json_decode(File::get($cntryjson), true);
+   $countries =collect( $countries );
+   $client_country=$countries->where('alpha2',$client->country)->first();
+   if($client_country){
+    $client->country_conv=$client_country['name'];
+   }else{
+    $client->country_conv='-';
+   }
 
+  // return $client_country;
+    return view('admin.client.show', [
+      'client' => $client,
+    ]);
+  }
   /**
    * Show the form for creating a new resource.
    */
@@ -153,13 +193,8 @@ class ClientController extends Controller
       return response()->json("ok");
     }
   }
-  /**
-   * Display the specified resource.
-   */
-  public function show(string $id)
-  {
-    //
-  }
+  
+   
 
   /**
    * Show the form for editing the specified resource.
@@ -415,6 +450,10 @@ class ClientController extends Controller
         if ($set_arr['minpoints'] > $pull_points) {
           return response()->json("big-value");
         } else {
+          //get client
+          $clint = Client::find($id);
+          $balance_before=$clint->balance;
+          $balance_after= $balance_before-$pull_points;
           //add record
           $transObj = new PointTrans();
           $transObj->type = 'p';
@@ -423,10 +462,14 @@ class ClientController extends Controller
           $transObj->client_id = $id;
           $transObj->pointsrate = $set_arr['pointsrate'];
           $transObj->cash = $this->CalcCash($pull_points, $set_arr['pointsrate']);
-           $transObj->save();  
+          $transObj->balance_before = $balance_before;
+          $transObj->balance_after =  $balance_after;
+          $transObj->status = 'confirm';
+          $transObj->save();  
           //update client balance
-          $clint = Client::find($id);
-          $clint->balance -= $pull_points;
+         
+        //  $clint->balance -= $pull_points;
+        $clint->balance =  $balance_after;       
            $clint->save();   
         }
         //  return redirect()->back();

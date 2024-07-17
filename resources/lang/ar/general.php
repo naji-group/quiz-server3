@@ -96,6 +96,8 @@ return [
 'active' => 'مفعل',
 'notactive' => 'غير مفعل',
 'projects' => 'المشاريع',
+'male'=>'ذكر',
+'female'=>'أنثى',
 ];
 /*
 

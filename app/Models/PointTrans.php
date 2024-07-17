@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 class PointTrans extends Model
 {
     use HasFactory;
@@ -16,10 +17,14 @@ class PointTrans extends Model
         'level_id',
         'client_id',
         'category_id',
-'pointsrate',
-'cash'
+        'pointsrate',
+        'cash',
+        'balance_before',
+        'balance_after',
+        'notes',
+        'status',
     ];
-  
+
     public function level(): BelongsTo
     {
         return $this->belongsTo(Level::class)->withDefault();

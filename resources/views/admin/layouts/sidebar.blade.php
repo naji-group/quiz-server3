@@ -62,14 +62,14 @@
                         <span class="nav-link-text me-1">الاسئلة</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link " href="{{route('social.index')}}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">view_in_ar</i>
                         </div>
                         <span class="nav-link-text me-1">وسائل التواصل</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link " href="{{url('admin/setting/general')}}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
@@ -79,7 +79,7 @@
                     </a>
                 </li>
 
-
+{{-- 
                 <li class="nav-item">
                     <a class="nav-link " href="{{route('admin')}}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
@@ -88,12 +88,12 @@
                         <span class="nav-link-text me-1">منطقة الاعلانات</span>
                     </a>
                 </li>
-              
+               --}}
               
              
                
                 <li class="nav-item">
-                    <a class="nav-link " href="{{ route('user.index') }}">
+                    <a class="nav-link" href="{{ route('user.index') }}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">table_view</i>
                         </div>
@@ -101,14 +101,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="{{route('admin')}}">
+                    <a class="nav-link " href="{{url('admin/client')}}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons-round opacity-10">table_view</i>
                         </div>
                         <span class="nav-link-text me-1">الاعضاء</span>
                     </a>
                 </li>
-             
+                <li class="nav-item">
+                    <a class="nav-link " href="{{url('admin/client/allpull')}}">
+                        <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">
+                            <i class="material-icons-round opacity-10">table_view</i>
+                        </div>
+                        <span class="nav-link-text me-1">عمليات السحب</span>
+                    </a>
+                </li>
                 <li class="nav-item" id="nb">
                     <a class="nav-link " href="{{url('admin/page')}}">
                         <div class="text-white text-center ms-2 d-flex align-items-center justify-content-center">

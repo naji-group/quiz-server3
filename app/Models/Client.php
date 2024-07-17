@@ -63,7 +63,7 @@ class Client extends Authenticatable
         'password',
         'remember_token',
     ];
-    protected $appends= ['image_path','full_name','birthdateStr'];
+    protected $appends= ['image_path','full_name','birthdateStr','gender_conv','country_conv'];
     public function getImagePathAttribute(){
         $conv="";
         $strgCtrlr = new StorageController(); 
@@ -78,6 +78,22 @@ class Client extends Authenticatable
        
             return  $conv;
      }
+
+     public function getGenderConvAttribute(){
+        $conv = "-";
+        If($this->gender){
+            if ($this->gender == 'male') {
+                $conv = __('general.male',['ar']);
+            } else {
+                $conv = __('general.female',['ar']);
+            }
+    
+        }
+          
+             return  $conv;
+      }
+
+      //
      public function clientsocials(): HasMany
      {
          return $this->hasMany(ClientSocial::class,'client_id');

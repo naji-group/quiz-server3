@@ -55,7 +55,15 @@ body {
 #languageDropdown{
    display: flex;align-items: center; 
 }
-
+#languageDropdown img ,#languageDropdown span ,#languageDropdown i{
+  padding: 0px 2px;
+}
+.dropdown-item img,.dropdown-item span{
+  padding: 0px 2px;
+}
+#accountDropdown span{
+  padding: 0px 2px;
+}
 /* تعديلات للقائمة السفلية */
 .fixed-bottom {
   display: flex;
