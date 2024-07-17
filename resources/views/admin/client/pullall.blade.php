@@ -27,7 +27,7 @@
                     <h4>عمليات السحب لكل الاعضاء</h4>
                 </div>
                 <div class="form-group btn-create  justify-content-end" style="display: flex">
-                    <a href="{{ route('user.create') }}" class="btn btn-primary">جديد</a>
+                    {{-- <a href="{{ route('user.create') }}" class="btn btn-primary">جديد</a> --}}
                 </div>
             </div>
             <div class="table-responsive">
