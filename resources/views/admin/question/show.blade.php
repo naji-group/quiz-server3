@@ -64,6 +64,8 @@
                     </tbody>
                 </table>
             </div>
+            
+            {{ $List->onEachSide(5)->links() }}
         </div>
 
     </main>

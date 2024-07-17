@@ -28,7 +28,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $items = Question::with('category', 'language')->get();
+        $items = Question::with('category', 'language')->paginate(100);
 
         return view("admin.question.show", ["List" => $items,]);
     }
