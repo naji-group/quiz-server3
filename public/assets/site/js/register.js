@@ -102,6 +102,7 @@ if(validatempty($("#name")) && validatempty($("#email")) && validateinputemail($
 				} else if (data == "ok") {
 					noteSuccess(); 	
           var url= window.location.origin;
+		  url=url+'?lang='+ lang;
 					$(location).attr('href',url); 
 				} else {
 					noteError();

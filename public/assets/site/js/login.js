@@ -1,4 +1,5 @@
 var valid=true;
+
 $(document).ready(function() {
   
   $("#email").focusout(function (e) {
@@ -56,6 +57,7 @@ if( validatempty($("#email")) && validateinputemail($("#email"),emailmsg) && val
 				} else if (data == "ok") {
 					noteSuccess(); 	
           var url= window.location.origin;
+		  url=url+'?lang='+ lang;
 					$(location).attr('href',url); 
 				} else {
 					noteError();

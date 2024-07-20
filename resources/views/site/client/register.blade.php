@@ -89,7 +89,7 @@
     var input_email= "{{$sitedataCtrlr->gettrans($register,'input-email')}}";
     var success_msg= "{{$sitedataCtrlr->gettrans($register,'success-register')}}";
     var fail_msg= "{{$sitedataCtrlr->gettrans($register,'fail-register')}}";
-    
+    var lang="{{ $lang }}";
 </script>
     <script src="{{ url('assets/site/js/sweetalert.min.js') }}"></script>
     <script src="{{ url('assets/site/js/validate.js') }}"></script>
