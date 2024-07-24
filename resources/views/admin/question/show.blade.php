@@ -6,11 +6,20 @@
             <div class="container">
                 <div class="form-group btn-create">
                     <h4>الاسئلة</h4>
+                   <form name="create_form" method="POST" action="{{ url('admin/search') }}"
+                   id="s_form">
+                   @csrf
+                    <input type="text" class="form-controll" name="content" id="content"
+                    placeholder="بحث" value="">
+                    <button type="submit" id="btn_search" class="btn btn-primary float-right  "
+                    style="margin-right: 20px;margin-left: 20px">بحث </button>
+                </form>
                 </div>
                 <div class="form-group btn-create  justify-content-end" style="display: flex">
                     <a href="{{route('question.create') }}" class="btn btn-primary">جديد</a>
                 </div>
             </div>
+            @if(@isset($List))
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -28,6 +37,9 @@
                         @php
                             $i = 0;
                         @endphp
+                    
+                            
+                      
                         @forelse ($List as $ques) 
                         <tr>
                                 <th scope="row">{{ ++$i }}</th>
@@ -64,8 +76,10 @@
                     </tbody>
                 </table>
             </div>
-            
-            {{ $List->onEachSide(5)->links() }}
+            {!! $List->render() !!}
+            @endif
+         
+           
         </div>
 
     </main>

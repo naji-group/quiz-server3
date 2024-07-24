@@ -20,7 +20,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
-
+use Illuminate\Support\Facades\Session;
+ 
 class QuestionController extends Controller
 {
     /**
@@ -32,7 +33,32 @@ class QuestionController extends Controller
 
         return view("admin.question.show", ["List" => $items,]);
     }
-
+    public function search(Request $request )
+    {
+       
+       // $formdata = $request->all();
+        $searchval=$request->input('content');
+    //   if($request->input('page')){
+    //     return $request->input('page');
+    //   }
+       if($searchval!=''){
+        //return $searchval;
+        $List = Question::with('category', 'language')->where('content','like','%'.$searchval.'%')
+        ->paginate(5)
+        ->setpath('');
+        $List->appends(array(
+            'content'=>$searchval));
+            if(count($List)>0){
+                return view("admin.question.show", ["List" => $List]);
+            }else{
+                return view("admin.question.show" );
+            }
+       }else{
+        $List=null;
+       }   
+      
+       
+    }
     /**
      * Show the form for creating a new resource.
      */

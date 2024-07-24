@@ -61,7 +61,7 @@ Route::get('/cashclear', function () {
 
 Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin');
-
+    Route::any('/search', [QuestionController::class, 'search']);
     Route::middleware('role.admin:admin')->group(function () {
         Route::resource('user', UserController::class, ['except' => ['update']]);
         Route::prefix('user')->group(function () {
@@ -146,7 +146,7 @@ Route::middleware(['auth:web', 'verified'])->prefix('admin')->group(function () 
         Route::resource('question', QuestionController::class, ['except' => ['update']]);
         Route::prefix('question')->group(function () {
             Route::post('/update/{id}', [QuestionController::class, 'update'])->name('question.update');
-
+            Route::any('/search', [QuestionController::class, 'search']);
         });
         //footer
         Route::prefix('post')->group(function () {
