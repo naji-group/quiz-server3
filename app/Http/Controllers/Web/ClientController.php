@@ -48,8 +48,8 @@ class ClientController extends Controller
   }
   public function pullops($id)
   {
-    $client=Client::find($id);
-    $op_list = PointTrans::with('client')->where('client_id',$id)->orderByDesc('created_at')->paginate(100);
+    $client = Client::find($id);
+    $op_list = PointTrans::with('client')->where('client_id', $id)->orderByDesc('created_at')->paginate(100);
     return view('admin.client.pull', [
       'op_list' => $op_list,
       'client' => $client,
@@ -67,19 +67,19 @@ class ClientController extends Controller
    */
   public function show($id)
   {
-    $lang='ar';
+    $lang = 'ar';
     $client = Client::find($id);
-   $cntryjson=  'assets/site/js/countries/' . $lang . '/countries.json' ;
-   $countries = json_decode(File::get($cntryjson), true);
-   $countries =collect( $countries );
-   $client_country=$countries->where('alpha2',$client->country)->first();
-   if($client_country){
-    $client->country_conv=$client_country['name'];
-   }else{
-    $client->country_conv='-';
-   }
+    $cntryjson = 'assets/site/js/countries/' . $lang . '/countries.json';
+    $countries = json_decode(File::get($cntryjson), true);
+    $countries = collect($countries);
+    $client_country = $countries->where('alpha2', $client->country)->first();
+    if ($client_country) {
+      $client->country_conv = $client_country['name'];
+    } else {
+      $client->country_conv = '-';
+    }
 
-  // return $client_country;
+    // return $client_country;
     return view('admin.client.show', [
       'client' => $client,
     ]);
@@ -93,7 +93,7 @@ class ClientController extends Controller
     $transarr = $sitedctrlr->FillTransData($lang);
     $defultlang = $transarr['langs']->first();
 
-    $register = $sitedctrlr->getbycode($defultlang->id, ['register','register-error']);
+    $register = $sitedctrlr->getbycode($defultlang->id, ['register', 'register-error']);
 
     return view('site.client.register', [
       'transarr' => $transarr,
@@ -109,7 +109,7 @@ class ClientController extends Controller
     $transarr = $sitedctrlr->FillTransData($lang);
     $defultlang = $transarr['langs']->first();
 
-    $login = $sitedctrlr->getbycode($defultlang->id, ['login','register-error']);
+    $login = $sitedctrlr->getbycode($defultlang->id, ['login', 'register-error']);
 
     return view('site.client.login', [
       'transarr' => $transarr,
@@ -137,7 +137,7 @@ class ClientController extends Controller
    */
   public function store(StoreClientRequest $request, $lang)//StoreClientRequest
   {
-    StoreClientRequest::$lang=$lang;
+    StoreClientRequest::$lang = $lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -193,8 +193,8 @@ class ClientController extends Controller
       return response()->json("ok");
     }
   }
-  
-   
+
+
 
   /**
    * Show the form for editing the specified resource.
@@ -212,7 +212,7 @@ class ClientController extends Controller
       $defultlang = $transarr['langs']->first();
       // $profile = $sitedctrlr->getbycode($defultlang->id, ['profile', 'register']);
 
-      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile','register-error']);
+      $profile = $sitedctrlr->getbycode($defultlang->id, ['profile', 'register-error']);
 
 
       return view(
@@ -265,7 +265,7 @@ class ClientController extends Controller
         $catarr[] = $newarr;
       }
       // return dd($catarr);
-      $translate = $sitedctrlr->getbycode($defultlang->id, ['my-score','header','public-score','home_page']);//chang
+      $translate = $sitedctrlr->getbycode($defultlang->id, ['my-score', 'header', 'public-score', 'home_page']);//chang
       return view(
         "site.client.score",
         [
@@ -328,9 +328,15 @@ class ClientController extends Controller
         $newarr['month_score']['cat_score'] = $monthrow['cat_sum'];
         $client = Client::find($monthrow['client_id']);
         $clpointmodel = ClientPoint::where('client_id', $client->id)->where('category_id', $catrow['category_id'])->orderByDesc('created_at')->first();
+        if ($clpointmodel->level) {
+          $newarr['month_score']['level'] = $clpointmodel->level->value;
+          $newarr['month_score']['client_name'] = $client->name;
+        } else {
+          $newarr['month_score']['cat_score'] = 0;
+          $newarr['month_score']['client_name'] = "-";
+          $newarr['month_score']['level'] = 0;
+        }
 
-        $newarr['month_score']['level'] = $clpointmodel->level->value;
-        $newarr['month_score']['client_name'] = $client->name;
       } else {
         $newarr['month_score']['cat_score'] = 0;
         $newarr['month_score']['client_name'] = "-";
@@ -343,7 +349,7 @@ class ClientController extends Controller
     //high balance client
     $firstclient = Client::orderByDesc('total_balance')->select('id', 'name', 'image', 'total_balance')->take(3)->get();
     // return dd($catarr);
-    $translate = $sitedctrlr->getbycode($defultlang->id, ['footer-menu','public-score','home_page','sort-places']);//chang
+    $translate = $sitedctrlr->getbycode($defultlang->id, ['footer-menu', 'public-score', 'home_page', 'sort-places']);//chang
     return view(
       "site.content.score",
       [
@@ -359,14 +365,14 @@ class ClientController extends Controller
 
   }
 
-   
- 
+
+
   /**
    * Update the specified resource in storage.
    */
-  public function update(UpdateClientRequest $request,$lang)
+  public function update(UpdateClientRequest $request, $lang)
   {
-    StoreClientRequest::$lang=$lang;
+    StoreClientRequest::$lang = $lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -402,9 +408,9 @@ class ClientController extends Controller
       return response()->json("ok");
     }
   }
-  public function updatepass(UpdatePassRequest $request,$lang)
+  public function updatepass(UpdatePassRequest $request, $lang)
   {
-    StoreClientRequest::$lang=$lang;
+    StoreClientRequest::$lang = $lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -427,9 +433,9 @@ class ClientController extends Controller
     }
   }
   //pull balance
-  public function pull(PullRequest $request,$lang)
+  public function pull(PullRequest $request, $lang)
   {
-    StoreClientRequest::$lang=$lang;
+    StoreClientRequest::$lang = $lang;
     $formdata = $request->all();
     // return  $formdata;
     // return redirect()->back()->with('success_message', $formdata);
@@ -452,8 +458,8 @@ class ClientController extends Controller
         } else {
           //get client
           $clint = Client::find($id);
-          $balance_before=$clint->balance;
-          $balance_after= $balance_before-$pull_points;
+          $balance_before = $clint->balance;
+          $balance_after = $balance_before - $pull_points;
           //add record
           $transObj = new PointTrans();
           $transObj->type = 'p';
@@ -463,14 +469,14 @@ class ClientController extends Controller
           $transObj->pointsrate = $set_arr['pointsrate'];
           $transObj->cash = $this->CalcCash($pull_points, $set_arr['pointsrate']);
           $transObj->balance_before = $balance_before;
-          $transObj->balance_after =  $balance_after;
+          $transObj->balance_after = $balance_after;
           $transObj->status = 'confirm';
-          $transObj->save();  
+          $transObj->save();
           //update client balance
-         
-        //  $clint->balance -= $pull_points;
-        $clint->balance =  $balance_after;       
-           $clint->save();   
+
+          //  $clint->balance -= $pull_points;
+          $clint->balance = $balance_after;
+          $clint->save();
         }
         //  return redirect()->back();
         return response()->json("ok");
@@ -487,11 +493,11 @@ class ClientController extends Controller
       $clint = Client::find($id);
       $setctrl = new SettingController();
       $set_arr = $setctrl->getquessetting();
-      $resArr=[
-        'pointsrate'=>$set_arr['pointsrate'],
-        'minpoints'=>$set_arr['minpoints'],
-        'balance'=> $clint->balance,
-    ];
+      $resArr = [
+        'pointsrate' => $set_arr['pointsrate'],
+        'minpoints' => $set_arr['minpoints'],
+        'balance' => $clint->balance,
+      ];
     }
     return response()->json($resArr);
 
