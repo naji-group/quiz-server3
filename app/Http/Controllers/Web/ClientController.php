@@ -328,7 +328,7 @@ class ClientController extends Controller
         $newarr['month_score']['cat_score'] = $monthrow['cat_sum'];
         $client = Client::find($monthrow['client_id']);
         $clpointmodel = ClientPoint::where('client_id', $client->id)->where('category_id', $catrow['category_id'])->orderByDesc('created_at')->first();
-        if ($clpointmodel->level) {
+        if ($clpointmodel) {
           $newarr['month_score']['level'] = $clpointmodel->level->value;
           $newarr['month_score']['client_name'] = $client->name;
         } else {
